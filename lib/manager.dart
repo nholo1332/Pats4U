@@ -1,7 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pats4u/views/calendar/calendar.dart';
-import 'package:pats4u/views/homeFeed/homeFeed.dart';
+import 'package:pats4u/views/home_feed/home_feed.dart';
 import 'package:pats4u/views/settings/settings.dart';
 import 'package:pats4u/views/staff/staff.dart';
 
