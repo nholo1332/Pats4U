@@ -1,5 +1,9 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pats4u/views/calendar/calendar.dart';
+import 'package:pats4u/views/homeFeed/homeFeed.dart';
+import 'package:pats4u/views/settings/settings.dart';
+import 'package:pats4u/views/staff/staff.dart';
 
 class Manager extends StatefulWidget {
 
@@ -9,6 +13,7 @@ class Manager extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _ManagerState();
   }
+
 }
 
 class _ManagerState extends State<Manager> {
@@ -16,12 +21,10 @@ class _ManagerState extends State<Manager> {
   // Create tabs for navigation tab bar
   int currentTabIndex = 0;
   final List<Widget> tabChildren = [
-    Container(),
-    Container(),
-    Container(),
-    Container(),
-    Container(),
-    Container(),
+    const HomeFeed(),
+    const Calendar(),
+    const Staff(),
+    const Settings(),
   ];
 
   @override
@@ -45,12 +48,20 @@ class _ManagerState extends State<Manager> {
         backgroundColor: Colors.black,
         unSelectedColor: Colors.white60,
         selectedColor: Colors.white,
+        iconSize: 30,
         items: [
           CustomNavigationBarItem(
-            icon: const Icon(Icons.home),
+            selectedIcon: Image.asset('assets/images/CLPats.png'),
+            icon: Image.asset('assets/images/CLPats_grey.png'),
           ),
           CustomNavigationBarItem(
-            icon: const Icon(Icons.home),
+            icon: const Icon(Icons.checklist),
+          ),
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.badge),
+          ),
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.settings),
           ),
         ],
       ),
@@ -63,4 +74,5 @@ class _ManagerState extends State<Manager> {
       currentTabIndex = index;
     });
   }
+
 }
