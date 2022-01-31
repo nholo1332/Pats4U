@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Calendar extends StatefulWidget {
-
   const Calendar({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     return _Calendar();
   }
-
 }
 
 class _Calendar extends State<Calendar> {
-
   @override
   void initState() {
     super.initState();
@@ -24,5 +21,4 @@ class _Calendar extends State<Calendar> {
       body: Container(),
     );
   }
-
 }

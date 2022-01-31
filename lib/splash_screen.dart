@@ -36,5 +36,4 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(),
     );
   }
-
 }

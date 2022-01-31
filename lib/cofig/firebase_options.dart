@@ -61,7 +61,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '603721193548',
     projectId: 'pats4u-88d84',
     storageBucket: 'pats4u-88d84.appspot.com',
-    iosClientId: '603721193548-v1n59l1grkto8simtp22t04rnu6reurq.apps.googleusercontent.com',
+    iosClientId:
+        '603721193548-v1n59l1grkto8simtp22t04rnu6reurq.apps.googleusercontent.com',
     iosBundleId: 'com.clfbla.pats4u',
   );
 }

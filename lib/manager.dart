@@ -6,18 +6,15 @@ import 'package:pats4u/views/settings/settings.dart';
 import 'package:pats4u/views/staff/staff.dart';
 
 class Manager extends StatefulWidget {
-
   const Manager({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     return _ManagerState();
   }
-
 }
 
 class _ManagerState extends State<Manager> {
-
   // Create tabs for navigation tab bar
   int currentTabIndex = 0;
   final List<Widget> tabChildren = [
@@ -36,7 +33,8 @@ class _ManagerState extends State<Manager> {
   Widget build(BuildContext context) {
     // Create the scaffold to hold the bottom navigation bar
     return Scaffold(
-      body: tabChildren[currentTabIndex], /*IndexedStack(
+      body: tabChildren[currentTabIndex],
+      /*IndexedStack(
         index: currentTabIndex,
         children: tabChildren,
       ),*/
@@ -74,5 +72,4 @@ class _ManagerState extends State<Manager> {
       currentTabIndex = index;
     });
   }
-
 }
