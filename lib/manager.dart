@@ -1,5 +1,6 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/calendar/calendar.dart';
 import 'package:pats4u/views/home_feed/home_feed.dart';
 import 'package:pats4u/views/settings/settings.dart';
@@ -31,6 +32,8 @@ class _ManagerState extends State<Manager> {
 
   @override
   Widget build(BuildContext context) {
+    // Configure the SizeConfig provider to allow for responsive font sizing
+    SizeConfig().init(context);
     // Create the scaffold to hold the bottom navigation bar
     return Scaffold(
       body: tabChildren[currentTabIndex],
