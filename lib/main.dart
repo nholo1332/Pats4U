@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pats4u/splash_screen.dart';
 import 'config/firebase_options.dart';
+import 'package:pats4u/themes/light_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +19,7 @@ class Pats4U extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pats4U',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme: lightTheme(),
       home: const SplashScreen(),
     );
   }
