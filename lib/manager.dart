@@ -41,6 +41,7 @@ class _ManagerState extends State<Manager> {
         index: currentTabIndex,
         children: tabChildren,
       ),*/
+      extendBody: true,
       bottomNavigationBar: CustomNavigationBar(
         isFloating: true,
         borderRadius: const Radius.circular(16),
