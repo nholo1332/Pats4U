@@ -37,6 +37,7 @@ dependencies:
   custom_navigation_bar: ^0.8.2
   firebase_core: ^1.12.0
   firebase_auth: ^3.3.6
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:
