@@ -33,7 +33,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
             alignment: const Alignment(0, 1.8),
             child: SizedBox(
               height: MediaQuery.of(context).size.height / 13,
-              width: MediaQuery.of(context).size.width / 5,
+              width: MediaQuery.of(context).size.width / 2,
               child: Text(
                 title,
                 style: TextStyle(
