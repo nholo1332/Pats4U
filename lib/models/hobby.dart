@@ -2,14 +2,16 @@ class Hobby {
 
   String title = '';
   String description = '';
-  String icon = '';
+  int icon = 0;
 
   Hobby();
 
   Hobby.fromJson(Map<String, dynamic> json) {
     title = json['title'] ?? '';
     description = json['description'] ?? '';
-    icon = json['icon'] ?? '';
+    icon = int.tryParse((json['icon'] ?? 'a').toString()) != null
+      ? int.parse((json['icon']).toString())
+      : 0;
   }
 
 }
