@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/providers/size_config.dart';
 
 class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
   final double height;
   final IconData? leftIcon;
   final VoidCallback? leftAction;
@@ -9,6 +10,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? rightAction;
 
   const MinimalAppBar({
+    this.title = '',
     this.height = kToolbarHeight,
     this.leftIcon,
     this.leftAction,
@@ -33,7 +35,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
               height: MediaQuery.of(context).size.height / 13,
               width: MediaQuery.of(context).size.width / 5,
               child: Text(
-                'Staff',
+                title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: SizeConfig.blockSizeVertical * 2.5,
