@@ -248,7 +248,7 @@ class _StaffDetailView extends State<StaffDetailView> {
                       ),
                       onTap: () {
                         openInfoDialog(
-                          widget.staffMember.hobbies[index].title,
+                          widget.staffMember.hobbies[index].title + ' - Hobby',
                           widget.staffMember.hobbies[index].description,
                         );
                       },
@@ -288,7 +288,7 @@ class _StaffDetailView extends State<StaffDetailView> {
                       ),
                       onTap: () {
                         openInfoDialog(
-                          widget.staffMember.funFacts[index].title,
+                          widget.staffMember.funFacts[index].title + ' - Fun Fact',
                           widget.staffMember.funFacts[index].description,
                         );
                       },
