@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pats4u/models/staff_member.dart';
 import 'package:pats4u/providers/backend.dart';
+import 'package:pats4u/views/staff/staff_detail_view.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 import 'package:pats4u/widgets/staff_item.dart';
 
@@ -23,6 +24,7 @@ class _Staff extends State<Staff> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MinimalAppBar(
+        title: 'Staff',
         height: 65,
       ),
       body: FutureBuilder(
@@ -60,15 +62,20 @@ class _Staff extends State<Staff> {
     );
   }
 
-  getStaff(List<StaffMember> staff) {
+  List<Widget> getStaff(List<StaffMember> staff) {
     List<Widget> items = [];
     items.addAll(
       List.generate(
-        staff.length + 20,
-            (index) => StaffItem(
-          staffMember: staff[0],
+        staff.length,
+        (index) => StaffItem(
+          staffMember: staff[index],
           onTap: () {
-            print('click');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StaffDetailView(staffMember: staff[index]),
+              ),
+            );
           },
         ),
       ),
