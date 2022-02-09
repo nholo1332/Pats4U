@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^3.3.6
   flutter_cache_manager: ^3.3.0
   url_launcher: ^6.0.18
+  scrollable_positioned_list: ^0.2.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
