@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:pats4u/models/class.dart';
+import 'package:pats4u/models/event.dart';
+import 'package:pats4u/models/months.dart';
 import 'package:pats4u/models/staff_member.dart';
+import 'package:pats4u/providers/events_cache_manager.dart';
 import 'package:pats4u/providers/staff_cache_manager.dart';
 
 class Backend {
@@ -26,6 +29,23 @@ class Backend {
       if ( await value.exists() ) {
         var res = await value.readAsString();
         return (json.decode(res) as List).map((s) => Class.fromJson(s)).toList();
+      } else {
+        return [];
+      }
+    });
+  }
+
+  static Future<List<Event>> getMonthEvents(Months month, {int year = 0, bool force = false}) async {
+    if ( year == 0 ) {
+      year = DateTime.now().year;
+    }
+    if ( force ) {
+      await EventsCacheManager().emptyCache();
+    }
+    return EventsCacheManager().getSingleFile(baseURL + '/events/all/' + year.toString() + '/' + month.name).then((value) async {
+      if ( await value.exists() ) {
+        var res = await value.readAsString();
+        return (json.decode(res) as List).map((s) => Event.fromJson(s)).toList();
       } else {
         return [];
       }
