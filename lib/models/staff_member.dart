@@ -23,8 +23,8 @@ class StaffMember {
     phone = json['phone'] ?? '';
     bio = json['bio'] ?? '';
     classes = List.from(json['classes'] ?? []);
-    funFacts = (json['funFacts'] as List).map((f) => FunFact.fromJson(f)).toList();
-    hobbies = (json['hobbies'] as List).map((h) => Hobby.fromJson(h)).toList();
+    funFacts = ((json['funFacts'] ?? []) as List).map((f) => FunFact.fromJson(f)).toList();
+    hobbies = ((json['hobbies'] ?? []) as List).map((h) => Hobby.fromJson(h)).toList();
   }
 
 }
