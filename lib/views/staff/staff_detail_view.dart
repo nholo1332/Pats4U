@@ -37,6 +37,7 @@ class _StaffDetailView extends State<StaffDetailView> {
           Navigator.pop(context);
         },
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: const EdgeInsets.only(
           left: 20,

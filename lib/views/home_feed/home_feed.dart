@@ -18,6 +18,7 @@ class _HomeFeed extends State<HomeFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(),
     );
   }

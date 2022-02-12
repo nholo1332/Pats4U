@@ -27,6 +27,7 @@ class _Staff extends State<Staff> {
         title: 'Staff',
         height: 65,
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
         future: Backend.getStaffMembers(),
         builder: (BuildContext context, AsyncSnapshot<List<StaffMember>> snapshot) {
