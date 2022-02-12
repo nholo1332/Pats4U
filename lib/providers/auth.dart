@@ -8,6 +8,18 @@ class Auth {
     return FirebaseAuth.instance.currentUser;
   }
 
+  static Future<UserCredential> login(String email, String password) {
+    return FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  static Future<UserCredential> register(String email, String password) {
+    return FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+  }
+
+  static Future<void> signOut() {
+    return FirebaseAuth.instance.signOut();
+  }
+
   static Future<String> getToken({bool force = false}) {
     var completer = Completer<String>();
 
