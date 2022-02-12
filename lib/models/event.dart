@@ -1,6 +1,5 @@
 import 'package:pats4u/models/event_link.dart';
 import 'package:pats4u/models/event_types.dart';
-import 'package:pats4u/models/months.dart';
 
 class Event {
 
