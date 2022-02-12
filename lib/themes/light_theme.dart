@@ -40,7 +40,7 @@ ThemeData lightTheme() {
         onSecondary: Colors.white,
         error: Colors.red,
         onError: Colors.white,
-        background: Colors.white70,
+        background: Colors.white,
         onBackground: Colors.black87,
         surface: Colors.white,
         onSurface: Colors.black87,
