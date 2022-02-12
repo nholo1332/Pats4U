@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pats4u/libraries/calendar_timeline/calendar_timeline.dart';
+import 'package:pats4u/providers/auth.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 import 'calendar_content_view.dart';
 
@@ -28,9 +30,11 @@ class _Calendar extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MinimalAppBar(
+      appBar: MinimalAppBar(
         title: 'Scheduling',
         height: 65,
+        rightIcon: Icons.add,
+        rightAction: addButtonClick,
       ),
       body: Column(
         children: [
@@ -56,5 +60,42 @@ class _Calendar extends State<Calendar> {
         ],
       ),
     );
+  }
+
+  addButtonClick() {
+    if ( Auth.getUser() != null ) {
+
+    } else {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Login to Add Events'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Before adding events to your calendar, you must first login.'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Login'),
+                onPressed: () {
+
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }

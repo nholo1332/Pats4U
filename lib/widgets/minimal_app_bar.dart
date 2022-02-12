@@ -73,7 +73,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
                   shape: const CircleBorder(),
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.chevron_left),
+                  icon: Icon(rightIcon),
                   color: Theme.of(context).colorScheme.onPrimary,
                   onPressed: rightAction,
                 ),

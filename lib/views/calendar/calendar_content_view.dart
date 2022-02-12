@@ -21,6 +21,7 @@ class CalendarContentView extends StatefulWidget {
 
 class _CalendarContentView extends State<CalendarContentView> {
   List<Event> monthEvents = [];
+  List<Event> dayEvents = [];
   DateTime? selectedMonthEvents;
 
   @override
@@ -42,9 +43,15 @@ class _CalendarContentView extends State<CalendarContentView> {
     );
   }
 
+  getTodayEvents(DateTime date) {
+    final dateFormat = DateFormat('MM/dd/yyyy');
+    dayEvents = monthEvents.where((event) => dateFormat.format(event.dateTime) == dateFormat.format(date)).toList();
+  }
+
   Widget loadMonthEvents(DateTime newDate) {
     final dateFormat = DateFormat('MM/yyyy');
     if ( selectedMonthEvents != null && dateFormat.format(newDate) == dateFormat.format(selectedMonthEvents ?? DateTime.now()) ) {
+      getTodayEvents(newDate);
       return buildEvents();
     } else {
       return FutureBuilder(
@@ -53,6 +60,7 @@ class _CalendarContentView extends State<CalendarContentView> {
           if ( snapshot.connectionState == ConnectionState.done && snapshot.data != null ) {
             selectedMonthEvents = newDate;
             monthEvents = snapshot.data!;
+            getTodayEvents(newDate);
             return buildEvents();
           } else {
             return buildLoading();

@@ -3,7 +3,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 class EventsCacheManager extends CacheManager {
 
   static const key = 'eventsCache';
-  static const Duration cacheTimeout = Duration(days: 5);
+  static const Duration cacheTimeout = Duration(days: 1);
 
   EventsCacheManager() : super(
     Config(
