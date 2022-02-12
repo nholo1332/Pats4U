@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pats4u/libraries/calendar_timeline/calendar_timeline.dart';
 import 'package:pats4u/providers/auth.dart';
+import 'package:pats4u/views/login/login.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 import 'calendar_content_view.dart';
 
@@ -64,11 +64,11 @@ class _Calendar extends State<Calendar> {
 
   addButtonClick() {
     if ( Auth.getUser() != null ) {
-
+      Auth.signOut();
     } else {
       showDialog<void>(
         context: context,
-        barrierDismissible: false, // user must tap button!
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Login to Add Events'),
@@ -89,7 +89,13 @@ class _Calendar extends State<Calendar> {
               TextButton(
                 child: const Text('Login'),
                 onPressed: () {
-
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Login(),
+                    ),
+                  );
                 },
               ),
             ],
