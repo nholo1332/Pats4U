@@ -12,6 +12,7 @@ class Event {
   DateTime dateTime = DateTime.now();
   bool allDay = false;
   List<EventLink> links = [];
+  bool isUserEvent = false;
 
   Event();
 
@@ -25,6 +26,7 @@ class Event {
     dateTime = json['dateTime'] != null ? DateTime.parse(json['dateTime']) : DateTime.now();
     allDay = json['allDay'] ?? false;
     links = ((json['links'] ?? []) as List).map((l) => EventLink.fromJson(l)).toList();
+    isUserEvent = json['isUserEvent'] ?? false;
   }
 
 }
