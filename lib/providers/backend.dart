@@ -48,6 +48,8 @@ class Backend {
       headers = {
         'Authorization': 'Bearer ' + value,
       };
+    }).catchError((_) {
+      headers = {};
     });
     return EventsCacheManager().getSingleFile(baseURL + '/events/all/' + year.toString() + '/' + month.name, headers: headers).then((value) async {
       if ( await value.exists() ) {
