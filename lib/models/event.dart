@@ -20,7 +20,7 @@ class Event {
 
   Event.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
-    title = json['title'] ?? '';
+    title = json['name'] ?? '';
     description = json['description'] ?? '';
     location = json['location'] ?? '';
     mapsLink = json['mapsLink'] ?? '';
@@ -33,13 +33,13 @@ class Event {
 
   Map<String, dynamic> toJSON() {
     return {
-      'title': title,
+      'name': title,
       'description': description,
       'location': location,
-      'eventType': eventType,
-      'dateTime': dateTime.toIso8601String(),
+      'eventType': eventType.name,
+      'dateTime': dateTime.toUtc().toIso8601String(),
       'allDay': allDay,
-      'links': jsonEncode(links.map((l) => l.toJSON()).toList()),
+      'links': links.map((l) => l.toJSON()).toList(),
       'isUserEvent': isUserEvent,
     };
   }
