@@ -488,6 +488,7 @@ class _CreateEventState extends State<CreateEvent> {
           ),
           action: SnackBarAction(
             label: 'Ok',
+            textColor: Theme.of(context).colorScheme.onError,
             onPressed: () { },
           ),
         ),
