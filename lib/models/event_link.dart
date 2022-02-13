@@ -10,4 +10,11 @@ class EventLink {
     link = json['link'] ?? '';
   }
 
+  Map<String, dynamic> toJSON() {
+    return {
+      'name': name,
+      'link': link,
+    };
+  }
+
 }

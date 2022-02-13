@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:pats4u/models/event_link.dart';
 import 'package:pats4u/models/event_types.dart';
 
@@ -27,6 +29,19 @@ class Event {
     allDay = json['allDay'] ?? false;
     links = ((json['links'] ?? []) as List).map((l) => EventLink.fromJson(l)).toList();
     isUserEvent = json['isUserEvent'] ?? false;
+  }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'title': title,
+      'description': description,
+      'location': location,
+      'eventType': eventType,
+      'dateTime': dateTime.toIso8601String(),
+      'allDay': allDay,
+      'links': jsonEncode(links.map((l) => l.toJSON()).toList()),
+      'isUserEvent': isUserEvent,
+    };
   }
 
 }
