@@ -4,7 +4,7 @@ import 'package:pats4u/models/staff_member.dart';
 import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
-import 'package:pats4u/widgets/profile_image.dart';
+import 'package:pats4u/widgets/image_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StaffDetailView extends StatefulWidget {
@@ -56,7 +56,7 @@ class _StaffDetailView extends State<StaffDetailView> {
     List<Widget> items = [];
     items.add(
       Center(
-        child: ProfileImage(
+        child: ImageContainer(
           image: widget.staffMember.picture,
           radius: 100,
           height: 200,

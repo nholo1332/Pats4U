@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pats4u/models/staff_member.dart';
-import 'package:pats4u/widgets/profile_image.dart';
+import 'package:pats4u/widgets/image_container.dart';
 
 class StaffItem extends StatelessWidget {
 
@@ -40,7 +40,7 @@ class StaffItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ProfileImage(
+                ImageContainer(
                   image: staffMember.picture,
                   width: size,
                   height: size,

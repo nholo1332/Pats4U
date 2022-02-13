@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
 import 'package:pats4u/providers/staff_image_cache_manager.dart';
 
-class ProfileImage extends StatelessWidget {
+class ImageContainer extends StatelessWidget {
   final String image;
   final double width;
   final double height;
@@ -16,7 +16,7 @@ class ProfileImage extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
 
-  const ProfileImage({
+  const ImageContainer({
     required this.image,
     this.width = 100,
     this.height = 100,

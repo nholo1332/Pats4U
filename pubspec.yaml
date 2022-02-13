@@ -73,6 +73,14 @@ flutter:
     - assets/images/CLPats.png
     - assets/images/CLPats_grey.png
     - assets/images/account_line.png
+    - assets/images/basketball.png
+    - assets/images/football.png
+    - assets/images/golf.png
+    - assets/images/other.png
+    - assets/images/school.png
+    - assets/images/track.png
+    - assets/images/volleyball.png
+    - assets/images/wrestling.png
 
   fonts:
     - family: Poppins
