@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/libraries/calendar_timeline/calendar_timeline.dart';
 import 'package:pats4u/models/calendar_stream_event.dart';
 import 'package:pats4u/providers/auth.dart';
-import 'package:pats4u/views/calendar/add_event.dart';
+import 'package:pats4u/views/calendar/create_event.dart';
 import 'package:pats4u/views/login/login.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 import 'calendar_content_view.dart';
@@ -70,7 +70,7 @@ class _CalendarState extends State<Calendar> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const AddEvent(),
+          builder: (context) => const CreateEvent(),
         ),
       ).then((value) {
         dateStreamController.add(
