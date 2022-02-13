@@ -82,12 +82,13 @@ class _LoginState extends State<Login> {
                       Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14.0),
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: TextFormField(
                           enabled: !loading,
                           initialValue: email,
                           keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
                           onChanged: (value) {
                             email = value;
                           },
@@ -105,12 +106,13 @@ class _LoginState extends State<Login> {
                       Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14.0),
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: TextFormField(
                           enabled: !loading,
                           initialValue: password,
                           obscureText: true,
+                          autocorrect: false,
                           onChanged: (value) {
                             password = value;
                           },
@@ -132,7 +134,7 @@ class _LoginState extends State<Login> {
                   height: 56,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(14.0),
+                    borderRadius: BorderRadius.circular(14),
                   ),
                   child: Material(
                     color: Colors.transparent,
@@ -140,7 +142,7 @@ class _LoginState extends State<Login> {
                       onTap: loading
                           ? null
                           : login,
-                      borderRadius: BorderRadius.circular(14.0),
+                      borderRadius: BorderRadius.circular(14),
                       child: Center(
                         child: loading
                             ? CircularProgressIndicator(

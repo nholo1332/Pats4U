@@ -82,7 +82,7 @@ class _RegisterState extends State<Register> {
                       Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14.0),
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: TextFormField(
                           enabled: !loading,
@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
                       Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14.0),
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: TextFormField(
                           enabled: !loading,
@@ -127,7 +127,7 @@ class _RegisterState extends State<Register> {
                       Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14.0),
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: TextFormField(
                           enabled: !loading,
@@ -154,7 +154,7 @@ class _RegisterState extends State<Register> {
                   height: 56,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(14.0),
+                    borderRadius: BorderRadius.circular(14),
                   ),
                   child: Material(
                     color: Colors.transparent,
@@ -162,7 +162,7 @@ class _RegisterState extends State<Register> {
                       onTap: loading
                         ? null
                         : register,
-                      borderRadius: BorderRadius.circular(14.0),
+                      borderRadius: BorderRadius.circular(14),
                       child: Center(
                         child: loading
                           ? CircularProgressIndicator(
