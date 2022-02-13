@@ -231,29 +231,33 @@ class _StaffDetailView extends State<StaffDetailView> {
                   ),
                 ],
               ),
-              if ( widget.staffMember.hobbies.isNotEmpty ) Row(
+              if ( widget.staffMember.hobbies.isNotEmpty ) Column(
                 children: List.generate(
                   widget.staffMember.hobbies.length,
-                  (index) => Expanded(
-                    child: ListTile(
-                      leading: Icon(
-                        widget.staffMember.hobbies[index].icon != 0
-                          ? IconData(widget.staffMember.hobbies[index].icon)
-                          : Icons.star,
+                  (index) => Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          leading: Icon(
+                            widget.staffMember.hobbies[index].icon != 0
+                                ? IconData(widget.staffMember.hobbies[index].icon)
+                                : Icons.star,
+                          ),
+                          title: Text(
+                            widget.staffMember.hobbies[index].title,
+                          ),
+                          subtitle: Text(
+                            widget.staffMember.hobbies[index].description,
+                          ),
+                          onTap: () {
+                            openInfoDialog(
+                              widget.staffMember.hobbies[index].title + ' - Hobby',
+                              widget.staffMember.hobbies[index].description,
+                            );
+                          },
+                        ),
                       ),
-                      title: Text(
-                        widget.staffMember.hobbies[index].title,
-                      ),
-                      subtitle: Text(
-                          widget.staffMember.hobbies[index].description,
-                      ),
-                      onTap: () {
-                        openInfoDialog(
-                          widget.staffMember.hobbies[index].title + ' - Hobby',
-                          widget.staffMember.hobbies[index].description,
-                        );
-                      },
-                    ),
+                    ],
                   ),
                 ),
               ),
@@ -271,29 +275,33 @@ class _StaffDetailView extends State<StaffDetailView> {
                   ),
                 ],
               ),
-              if ( widget.staffMember.funFacts.isNotEmpty ) Row(
+              if ( widget.staffMember.funFacts.isNotEmpty ) Column(
                 children: List.generate(
                   widget.staffMember.funFacts.length,
-                  (index) => Expanded(
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.star_rate,
+                  (index) => Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.star_rate,
+                          ),
+                          title: Text(
+                            widget.staffMember.funFacts[index].title,
+                          ),
+                          subtitle: Text(
+                            widget.staffMember.funFacts[index].description,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          onTap: () {
+                            openInfoDialog(
+                              widget.staffMember.funFacts[index].title + ' - Fun Fact',
+                              widget.staffMember.funFacts[index].description,
+                            );
+                          },
+                        ),
                       ),
-                      title: Text(
-                        widget.staffMember.funFacts[index].title,
-                      ),
-                      subtitle: Text(
-                        widget.staffMember.funFacts[index].description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      onTap: () {
-                        openInfoDialog(
-                          widget.staffMember.funFacts[index].title + ' - Fun Fact',
-                          widget.staffMember.funFacts[index].description,
-                        );
-                      },
-                    ),
+                    ],
                   ),
                 ),
               ),
