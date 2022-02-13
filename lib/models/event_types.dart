@@ -4,6 +4,7 @@ enum EventTypes {
   basketball,
   wrestling,
   track,
+  golf,
   school,
   other,
 }
