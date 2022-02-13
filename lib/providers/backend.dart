@@ -104,4 +104,21 @@ class Backend {
       return User.fromJson(value.data);
     });
   }
+
+  static Future<String> addEvent(Event event) async {
+    await UserCacheManager().emptyCache();
+    return Auth.getToken().then((token) {
+      return Dio().post(
+        baseURL + '/events/add',
+        data: jsonEncode(event.toJSON()),
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer ' + token,
+          },
+        ),
+      );
+    }).then((value) {
+      return value.data['id'] ?? '';
+    });
+  }
 }
