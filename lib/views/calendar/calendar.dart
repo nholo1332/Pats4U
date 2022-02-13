@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pats4u/libraries/calendar_timeline/calendar_timeline.dart';
+import 'package:pats4u/models/calendar_stream_event.dart';
 import 'package:pats4u/providers/auth.dart';
+import 'package:pats4u/views/calendar/add_event.dart';
 import 'package:pats4u/views/login/login.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 import 'calendar_content_view.dart';
@@ -12,18 +14,18 @@ class Calendar extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _Calendar();
+    return _CalendarState();
   }
 }
 
-class _Calendar extends State<Calendar> {
-  StreamController<DateTime> dateStreamController = StreamController<DateTime>();
+class _CalendarState extends State<Calendar> {
+  StreamController<CalendarStreamEvent> dateStreamController = StreamController<CalendarStreamEvent>();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      dateStreamController.add(DateTime.now());
+      dateStreamController.add(CalendarStreamEvent.create(DateTime.now()));
     });
   }
 
@@ -36,6 +38,7 @@ class _Calendar extends State<Calendar> {
         rightIcon: Icons.add,
         rightAction: addButtonClick,
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
         children: [
           CalendarTimeline(
@@ -50,7 +53,7 @@ class _Calendar extends State<Calendar> {
             locale: 'en_ISO',
             onDateSelected: (date) {
               if ( date != null ) {
-                dateStreamController.add(date);
+                dateStreamController.add(CalendarStreamEvent.create(date));
               }
             },
           ),
@@ -64,7 +67,19 @@ class _Calendar extends State<Calendar> {
 
   addButtonClick() {
     if ( Auth.getUser() != null ) {
-      Auth.signOut();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AddEvent(),
+        ),
+      ).then((value) {
+        dateStreamController.add(
+          CalendarStreamEvent.create(
+            DateTime.now(),
+            force: true,
+          ),
+        );
+      });
     } else {
       showDialog<void>(
         context: context,

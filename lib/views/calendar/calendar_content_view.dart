@@ -3,10 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:pats4u/models/event.dart';
 import 'package:pats4u/providers/backend.dart';
 
+import '../../models/calendar_stream_event.dart';
 import '../../models/months.dart';
 
 class CalendarContentView extends StatefulWidget {
-  final Stream<DateTime> dateStream;
+  final Stream<CalendarStreamEvent> dateStream;
 
   const CalendarContentView({
     required this.dateStream,
@@ -33,9 +34,9 @@ class _CalendarContentView extends State<CalendarContentView> {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: widget.dateStream,
-      builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<CalendarStreamEvent> snapshot) {
         if ( snapshot.data != null ) {
-          return loadMonthEvents(snapshot.data!);
+          return loadMonthEvents(snapshot.data!.dateTime, snapshot.data!.forceUpdate);
         } else {
           return buildLoading();
         }
@@ -48,14 +49,14 @@ class _CalendarContentView extends State<CalendarContentView> {
     dayEvents = monthEvents.where((event) => dateFormat.format(event.dateTime) == dateFormat.format(date)).toList();
   }
 
-  Widget loadMonthEvents(DateTime newDate) {
+  Widget loadMonthEvents(DateTime newDate, bool forceUpdate) {
     final dateFormat = DateFormat('MM/yyyy');
-    if ( selectedMonthEvents != null && dateFormat.format(newDate) == dateFormat.format(selectedMonthEvents ?? DateTime.now()) ) {
+    if ( selectedMonthEvents != null && dateFormat.format(newDate) == dateFormat.format(selectedMonthEvents ?? DateTime.now()) && !forceUpdate ) {
       getTodayEvents(newDate);
       return buildEvents();
     } else {
       return FutureBuilder(
-        future: Backend.getMonthEvents(Months.values[newDate.month - 1]),
+        future: Backend.getMonthEvents(Months.values[newDate.month - 1], force: forceUpdate),
         builder: (BuildContext context, AsyncSnapshot<List<Event>> snapshot) {
           if ( snapshot.connectionState == ConnectionState.done && snapshot.data != null ) {
             selectedMonthEvents = newDate;
