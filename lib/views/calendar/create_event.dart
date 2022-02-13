@@ -29,7 +29,7 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   void initState() {
     super.initState();
-    if ( widget.editEvent != null && ( widget.editEvent ?? Event() ).id == '' ) {
+    if ( widget.editEvent != null && ( widget.editEvent ?? Event() ).id != '' ) {
       event = widget.editEvent!;
     } else {
       event.isUserEvent = true;
@@ -456,11 +456,34 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   saveEvent() {
-    if ( event.title != '' ) {
+    if ( event.title != '' && event.id == '' ) {
       setState(() {
         saving = true;
       });
       Backend.addEvent(event).then((value) {
+        Navigator.of(context).pop(true);
+      }).catchError((error) {
+        setState(() {
+          saving = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Failed to save event.'),
+            duration: const Duration(
+              seconds: 3,
+            ),
+            action: SnackBarAction(
+              label: 'Ok',
+              onPressed: () { },
+            ),
+          ),
+        );
+      });
+    } else if ( event.title != '' && event.id != '' ) {
+      setState(() {
+        saving = true;
+      });
+      Backend.updateEvent(event).then((value) {
         Navigator.of(context).pop(true);
       }).catchError((error) {
         setState(() {

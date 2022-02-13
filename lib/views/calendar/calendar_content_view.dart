@@ -4,6 +4,7 @@ import 'package:pats4u/models/event.dart';
 import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/calendar/calendar_event_detail_view.dart';
+import 'package:pats4u/views/calendar/create_event.dart';
 
 import '../../models/calendar_stream_event.dart';
 import '../../models/months.dart';
@@ -270,12 +271,25 @@ class _CalendarContentView extends State<CalendarContentView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CalendarEventDetailView(event: event),
+        builder: (context) => CalendarEventDetailView(
+          event: event,
+        ),
       ),
     );
   }
 
   editEvent(Event event) {
-
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CreateEvent(
+          editEvent: event,
+        ),
+      ),
+    ).then((value) => {
+      if ( value == true ) {
+        setState(() { })
+      }
+    });
   }
 }
