@@ -456,18 +456,33 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   saveEvent() {
-    setState(() {
-      saving = true;
-    });
-    Backend.addEvent(event).then((value) {
-      Navigator.of(context).pop(true);
-    }).catchError((error) {
+    if ( event.title != '' ) {
       setState(() {
-        saving = false;
+        saving = true;
       });
+      Backend.addEvent(event).then((value) {
+        Navigator.of(context).pop(true);
+      }).catchError((error) {
+        setState(() {
+          saving = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Failed to save event.'),
+            duration: const Duration(
+              seconds: 3,
+            ),
+            action: SnackBarAction(
+              label: 'Ok',
+              onPressed: () { },
+            ),
+          ),
+        );
+      });
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Failed to save event.'),
+          content: const Text('Please enter an event name.'),
           duration: const Duration(
             seconds: 3,
           ),
@@ -477,6 +492,6 @@ class _CreateEventState extends State<CreateEvent> {
           ),
         ),
       );
-    });
+    }
   }
 }
