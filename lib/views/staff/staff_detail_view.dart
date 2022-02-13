@@ -52,7 +52,7 @@ class _StaffDetailView extends State<StaffDetailView> {
     );
   }
 
-  buildBody() {
+  List<Widget> buildBody() {
     List<Widget> items = [];
     items.add(
       Center(
