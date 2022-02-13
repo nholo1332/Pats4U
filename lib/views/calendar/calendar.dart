@@ -31,6 +31,7 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
+    dateStreamController.add(CalendarStreamEvent.create(DateTime.now()));
     return Scaffold(
       appBar: MinimalAppBar(
         title: 'Scheduling',
