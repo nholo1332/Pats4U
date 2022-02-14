@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class HomeFeed extends StatefulWidget {
-  const HomeFeed({Key? key}) : super(key: key);
+class LunchMenu extends StatefulWidget {
+  const LunchMenu({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _HomeFeedState();
+    return _LunchMenuState();
   }
 }
 
-class _HomeFeedState extends State<HomeFeed> {
+class _LunchMenuState extends State<LunchMenu> {
   @override
   void initState() {
     super.initState();

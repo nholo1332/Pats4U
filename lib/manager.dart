@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/calendar/calendar.dart';
 import 'package:pats4u/views/home_feed/home_feed.dart';
-import 'package:pats4u/views/settings/settings.dart';
+import 'package:pats4u/views/lunch/lunch_menu.dart';
 import 'package:pats4u/views/staff/staff.dart';
 
 class Manager extends StatefulWidget {
@@ -21,8 +21,8 @@ class _ManagerState extends State<Manager> {
   final List<Widget> tabChildren = [
     const HomeFeed(),
     const Calendar(),
+    const LunchMenu(),
     const Staff(),
-    const Settings(),
   ];
 
   @override
@@ -60,10 +60,10 @@ class _ManagerState extends State<Manager> {
             icon: const Icon(Icons.checklist),
           ),
           CustomNavigationBarItem(
-            icon: const Icon(Icons.badge),
+            icon: const Icon(Icons.restaurant_menu),
           ),
           CustomNavigationBarItem(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.badge),
           ),
         ],
       ),
