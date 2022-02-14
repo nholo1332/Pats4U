@@ -36,6 +36,8 @@ class _CalendarState extends State<Calendar> {
       appBar: MinimalAppBar(
         title: 'Scheduling',
         height: 65,
+        leftIcon: Icons.more_vert,
+        leftAction: openOptionsMenu,
         rightIcon: Icons.add,
         rightAction: addButtonClick,
       ),
@@ -121,5 +123,25 @@ class _CalendarState extends State<Calendar> {
         },
       );
     }
+  }
+
+  openOptionsMenu() {
+    showMenu(
+      context: context,
+      position: const RelativeRect.fromLTRB(0, 0, 0, 0),
+      items: [
+        PopupMenuItem<String>(
+          child: const Text('Reload Month'),
+          onTap: () {
+            dateStreamController.add(
+              CalendarStreamEvent.create(
+                DateTime.now(),
+                force: true,
+              ),
+            );
+          },
+        ),
+      ],
+    );
   }
 }
