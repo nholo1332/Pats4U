@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pats4u/providers/events_cache_manager.dart';
+import 'package:pats4u/providers/user_cache_manager.dart';
 
 class Auth {
 
@@ -17,7 +19,12 @@ class Auth {
   }
 
   static Future<void> signOut() {
-    return FirebaseAuth.instance.signOut();
+    return EventsCacheManager().emptyCache().then((_) {
+      UserCacheManager.resetUser();
+      return UserCacheManager().emptyCache();
+    }).then((_) {
+      return FirebaseAuth.instance.signOut();
+    });
   }
 
   static Future<String> getToken({bool force = false}) {
