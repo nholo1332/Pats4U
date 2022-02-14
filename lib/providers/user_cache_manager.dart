@@ -1,4 +1,5 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:pats4u/providers/constants.dart';
 
 class UserCacheManager extends CacheManager {
 
@@ -13,4 +14,8 @@ class UserCacheManager extends CacheManager {
       fileService: HttpFileService(),
     ),
   );
+
+  static resetUser() {
+    Constants().init();
+  }
 }

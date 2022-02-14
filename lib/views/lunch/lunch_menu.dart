@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pats4u/widgets/minimal_app_bar.dart';
 
 class LunchMenu extends StatefulWidget {
   const LunchMenu({Key? key}) : super(key: key);
@@ -18,6 +19,10 @@ class _LunchMenuState extends State<LunchMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const MinimalAppBar(
+        height: 65,
+        title: 'Lunch Menu',
+      ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(),
     );
