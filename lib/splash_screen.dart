@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pats4u/manager.dart';
 import 'package:pats4u/providers/auth.dart';
 import 'package:pats4u/providers/backend.dart';
@@ -14,9 +15,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void fetchData() {
+  void fetchData() async {
     // Fetch user information
     Constants().init();
+    // Pull application information (version, build, etc.) from compiled package
+    Constants.packageInfo = await PackageInfo.fromPlatform();
     if ( Auth.getUser() != null ) {
       Backend.getUserData().then((value) {
         Constants.userData = value;
