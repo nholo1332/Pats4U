@@ -5,6 +5,7 @@ import 'package:pats4u/models/lunch_menu_item.dart';
 import 'package:pats4u/models/week_menu.dart';
 import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/menu_helpers.dart';
+import 'package:pats4u/providers/menu_image_cache_manager.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/menus/menu_detail_view.dart';
 import 'package:pats4u/widgets/image_container.dart';
@@ -321,6 +322,7 @@ class _MenusState extends State<Menus> {
     if (item.image != '') {
       return ImageContainer(
         image: item.image,
+        imageCacheProvider: MenuImageCacheManager().getSingleFile(item.image),
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(30),
           bottom: Radius.zero,

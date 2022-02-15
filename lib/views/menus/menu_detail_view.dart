@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pats4u/models/lunch_menu_item.dart';
+import 'package:pats4u/providers/menu_image_cache_manager.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/widgets/image_container.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
@@ -226,6 +227,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
     if (item.image != '') {
       return ImageContainer(
         image: item.image,
+        imageCacheProvider: MenuImageCacheManager().getSingleFile(item.image),
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(30),
           bottom: Radius.zero,

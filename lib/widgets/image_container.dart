@@ -15,9 +15,11 @@ class ImageContainer extends StatelessWidget {
   final double radius;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
+  final Future<File>? imageCacheProvider;
 
   const ImageContainer({
     required this.image,
+    this.imageCacheProvider,
     this.width = 100,
     this.height = 100,
     this.bgColor,
@@ -34,6 +36,14 @@ class ImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<File>? imageProvider;
+    if ( isNetwork ) {
+      if ( imageCacheProvider == null ) {
+        imageProvider = StaffImageCacheManager().getSingleFile(image);
+      } else {
+        imageProvider = imageCacheProvider!;
+      }
+    }
     return Container(
       width: width,
       height: height,
@@ -50,9 +60,9 @@ class ImageContainer extends StatelessWidget {
             ),
         ],
       ),
-      child: isNetwork
+      child: isNetwork && imageProvider != null
           ? FutureBuilder(
-              future: StaffImageCacheManager().getSingleFile(image),
+              future: imageProvider,
               builder: (context, AsyncSnapshot<File> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.data != null) {
