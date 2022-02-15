@@ -13,6 +13,17 @@ class AdditionalLicenses extends LicenseEntry {
 Stream<LicenseEntry> licenses() async* {
   yield AdditionalLicenses(
     [
+      'Icons8.con',
+    ],
+    [
+      const LicenseParagraph(
+        'Twitter and Instagram icons courtesy of Icons8.com',
+        0,
+      ),
+    ],
+  );
+  yield AdditionalLicenses(
+    [
       'SKvector',
     ],
     [

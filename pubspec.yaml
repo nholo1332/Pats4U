@@ -94,6 +94,7 @@ flutter:
     - assets/images/wrestling.png
     - assets/policies/privacy.md
     - assets/images/icons8-twitter-144.png
+    - assets/images/icons8-instagram-144.png
     - assets/icon/icon.png
 
   fonts:
