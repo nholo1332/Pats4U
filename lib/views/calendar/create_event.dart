@@ -313,6 +313,18 @@ class _CreateEventState extends State<CreateEvent> {
         height: 25,
       ),
     );
+    if ( event.id == '' ) {
+      items.add(
+        const Center(
+          child: Text('This event is only viewable by you.'),
+        ),
+      );
+      items.add(
+        const SizedBox(
+          height: 15,
+        ),
+      );
+    }
     items.add(
       Container(
         height: 56,
