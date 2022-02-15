@@ -5,6 +5,7 @@ import 'package:pats4u/models/week_menu.dart';
 import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/menu_helpers.dart';
 import 'package:pats4u/providers/size_config.dart';
+import 'package:pats4u/views/menus/menu_detail_view.dart';
 import 'package:pats4u/widgets/image_container.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 
@@ -32,7 +33,7 @@ class _MenusState extends State<Menus> {
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
-        future: Backend.getWeekMenu(MenuHelpers.weekNumber(DateTime.now()), force: true),
+        future: Backend.getWeekMenu(MenuHelpers.weekNumber(DateTime.now())),
         builder: (BuildContext context, AsyncSnapshot<WeekMenu> snapshot) {
           if ( snapshot.data != null ) {
             return buildBody(snapshot.data!);
@@ -271,7 +272,15 @@ class _MenusState extends State<Menus> {
         ),
       ),
       onTap: () {
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MenuDetailView(
+              item: item,
+              lunch: lunch,
+            ),
+          ),
+        );
       },
     );
   }

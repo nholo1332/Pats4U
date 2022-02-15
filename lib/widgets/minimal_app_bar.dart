@@ -5,16 +5,20 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final double height;
   final IconData? leftIcon;
+  final Color? leftIconColor;
   final VoidCallback? leftAction;
   final IconData? rightIcon;
+  final Color? rightIconColor;
   final VoidCallback? rightAction;
 
   const MinimalAppBar({
     this.title = '',
     this.height = kToolbarHeight,
     this.leftIcon,
+    this.leftIconColor,
     this.leftAction,
     this.rightIcon,
+    this.rightIconColor,
     this.rightAction,
     Key? key,
   }) : super(key: key);
@@ -56,7 +60,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: IconButton(
                   icon: Icon(leftIcon),
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: leftIconColor ?? Theme.of(context).colorScheme.onPrimary,
                   onPressed: leftAction,
                 ),
               ),
@@ -74,7 +78,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: IconButton(
                   icon: Icon(rightIcon),
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: rightIconColor ?? Theme.of(context).colorScheme.onPrimary,
                   onPressed: rightAction,
                 ),
               ),
