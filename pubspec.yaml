@@ -45,6 +45,7 @@ dependencies:
   carousel_slider: ^4.0.0
   package_info_plus: ^1.3.0
   device_info_plus: ^3.2.1
+  flutter_markdown: ^0.6.9
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,7 @@ flutter:
     - assets/images/track.png
     - assets/images/volleyball.png
     - assets/images/wrestling.png
+    - assets/policies/privacy.md
 
   fonts:
     - family: Poppins

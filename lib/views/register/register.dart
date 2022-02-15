@@ -232,7 +232,6 @@ class _RegisterState extends State<Register> {
           ..pop()
           ..pop();
       }).catchError((error) {
-        print(error);
         setState(() {
           loading = false;
         });

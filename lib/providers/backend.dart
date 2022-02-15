@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:pats4u/models/class.dart';
 import 'package:pats4u/models/event.dart';
-import 'package:pats4u/models/lunch_menu_item.dart';
 import 'package:pats4u/models/months.dart';
 import 'package:pats4u/models/staff_member.dart';
 import 'package:pats4u/models/user.dart';
