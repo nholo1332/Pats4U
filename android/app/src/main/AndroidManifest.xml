@@ -1,9 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pats4u">
+    xmlns:tools="http://schemas.android.com/tools" package="com.example.pats4u">
    <application
         android:label="pats4u"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <provider
+           android:name="androidx.core.content.FileProvider"
+           android:authorities="${applicationId}.com.shekarmudaliyar.social_share"
+           android:exported="false"
+           android:grantUriPermissions="true"
+           tools:replace="android:authorities">
+           <meta-data
+               android:name="android.support.FILE_PROVIDER_PATHS"
+               android:resource="@xml/filepaths" />
+       </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true"
