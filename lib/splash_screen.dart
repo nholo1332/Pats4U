@@ -16,6 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void fetchData() {
     // Fetch user information
+    Constants().init();
     if ( Auth.getUser() != null ) {
       Backend.getUserData().then((value) {
         Constants.userData = value;

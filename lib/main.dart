@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pats4u/providers/constants.dart';
 import 'package:pats4u/splash_screen.dart';
 import 'config/firebase_options.dart';
 import 'package:pats4u/themes/light_theme.dart';
@@ -18,7 +17,6 @@ class Pats4U extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Constants().init();
     return MaterialApp(
       title: 'Pats4U',
       theme: lightTheme(),
