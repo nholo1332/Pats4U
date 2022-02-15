@@ -30,187 +30,190 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 40, 24, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Ink(
-                      decoration: ShapeDecoration(
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
-                        shape: const CircleBorder(),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.chevron_left),
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      'Register an\naccount',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical * 2.8,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Image.asset(
-                      'assets/images/account_line.png',
-                      width: 99,
-                      height: 4,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 48,
-                ),
-                Form(
-                  child: Column(
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 40, 24, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14),
+                      Ink(
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                          shape: const CircleBorder(),
                         ),
-                        child: TextFormField(
-                          enabled: !loading,
-                          initialValue: name,
-                          onChanged: (value) {
-                            name = value;
+                        child: IconButton(
+                          icon: const Icon(Icons.chevron_left),
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          onPressed: () {
+                            Navigator.of(context).pop();
                           },
-                          decoration: const InputDecoration(
-                            hintText: 'Full Name',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
                         ),
                       ),
                       const SizedBox(
-                        height: 32,
+                        height: 30,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: TextFormField(
-                          enabled: !loading,
-                          initialValue: email,
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (value) {
-                            email = value;
-                          },
-                          decoration: const InputDecoration(
-                            hintText: 'Email',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
+                      Text(
+                        'Register an\naccount',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical * 2.8,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       const SizedBox(
-                        height: 32,
+                        height: 20,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: TextFormField(
-                          enabled: !loading,
-                          initialValue: password,
-                          obscureText: true,
-                          onChanged: (value) {
-                            password = value;
-                          },
-                          decoration: const InputDecoration(
-                            hintText: 'Password',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                        ),
+                      Image.asset(
+                        'assets/images/account_line.png',
+                        width: 99,
+                        height: 4,
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                Container(
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(14),
+                  const SizedBox(
+                    height: 48,
                   ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: loading
-                        ? null
-                        : register,
+                  Form(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: TextFormField(
+                            enabled: !loading,
+                            initialValue: name,
+                            onChanged: (value) {
+                              name = value;
+                            },
+                            decoration: const InputDecoration(
+                              hintText: 'Full Name',
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: TextFormField(
+                            enabled: !loading,
+                            initialValue: email,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (value) {
+                              email = value;
+                            },
+                            decoration: const InputDecoration(
+                              hintText: 'Email',
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: TextFormField(
+                            enabled: !loading,
+                            initialValue: password,
+                            obscureText: true,
+                            onChanged: (value) {
+                              password = value;
+                            },
+                            decoration: const InputDecoration(
+                              hintText: 'Password',
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Container(
+                    height: 56,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(14),
-                      child: Center(
-                        child: loading
-                          ? CircularProgressIndicator(
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: loading
+                            ? null
+                            : register,
+                        borderRadius: BorderRadius.circular(14),
+                        child: Center(
+                          child: loading
+                              ? CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary),
                           )
-                          : Text(
-                          'Register',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                              : Text(
+                            'Register',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Have an account? ',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontSize: SizeConfig.blockSizeVertical * 1.8,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: loading
-                        ? null
-                        : () {
-                          Navigator.of(context).pop();
-                        },
-                      child: Text(
-                        'Login',
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Have an account? ',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onBackground,
                           fontSize: SizeConfig.blockSizeVertical * 1.8,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 75,
-                ),
-              ],
+                      GestureDetector(
+                        onTap: loading
+                            ? null
+                            : () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontSize: SizeConfig.blockSizeVertical * 1.8,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 75,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
