@@ -5,6 +5,7 @@ import 'package:pats4u/providers/event_helpers.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/widgets/image_container.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
+import 'package:social_share/social_share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalendarEventDetailView extends StatefulWidget {
@@ -223,7 +224,51 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
             ),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 275,
+            right: 10,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: Image.asset(
+                  'assets/images/icons8-twitter-144.png',
+                  fit: BoxFit.fill,
+                ),
+                onPressed: twitterShare,
+              ),
+            ],
+          ),
+        ),
       ],
     );
+  }
+
+  twitterShare() {
+    SocialShare.shareTwitter(
+      'This is Social Share twitter example',
+      hashtags: [
+        'hello',
+        'world',
+        'foo',
+        'bar',
+      ],
+      url:'https://your-url-here/',
+    ).catchError((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Failed to open Twitter'),
+          duration: const Duration(
+            seconds: 3,
+          ),
+          action: SnackBarAction(
+            label: 'Ok',
+            onPressed: () {},
+          ),
+        ),
+      );
+    });
   }
 }
