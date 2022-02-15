@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/providers/auth.dart';
 import 'package:pats4u/providers/constants.dart';
 import 'package:pats4u/providers/size_config.dart';
+import 'package:pats4u/views/bug_report/bug_report.dart';
 import 'package:pats4u/views/privacy_policy/privacy_policy.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 
@@ -143,6 +144,82 @@ class _SettingsState extends State<Settings> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const PrivacyPolicy(),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
+    items.add(
+      const SizedBox(
+        height: 25,
+      ),
+    );
+    items.add(
+      Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 25,
+            ),
+            child: Text(
+              'Bug Report',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    items.add(
+      Padding(
+        padding: const EdgeInsets.only(
+          left: 25,
+          right: 25,
+          top: 10,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Found a bug? Let us know so we can improve your app experience.',
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    items.add(
+      Padding(
+        padding: const EdgeInsets.only(
+          left: 25,
+          right: 25,
+          top: 10,
+        ),
+        child: Row(
+          children: [
+            OutlinedButton(
+              child: Text(
+                'Report Bug',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BugReport(),
                   ),
                 );
               },
