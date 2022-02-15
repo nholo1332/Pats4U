@@ -43,6 +43,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: SizeConfig.blockSizeVertical * 2.5,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
                 textAlign: TextAlign.center,
               ),
