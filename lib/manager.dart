@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/calendar/calendar.dart';
 import 'package:pats4u/views/home_feed/home_feed.dart';
-import 'package:pats4u/views/lunch/lunch_menu.dart';
+import 'package:pats4u/views/menus/menus.dart';
 import 'package:pats4u/views/staff/staff.dart';
 
 class Manager extends StatefulWidget {
@@ -21,7 +21,7 @@ class _ManagerState extends State<Manager> {
   final List<Widget> tabChildren = [
     const HomeFeed(),
     const Calendar(),
-    const LunchMenu(),
+    const Menus(),
     const Staff(),
   ];
 
