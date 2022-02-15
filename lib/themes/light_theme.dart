@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 const int bluePalettePrimary = 0xFF051064;
-const MaterialColor bluePalette =
-    MaterialColor(bluePalettePrimary, <int, Color>{
+const MaterialColor bluePalette = MaterialColor(bluePalettePrimary, <int, Color>{
   50: Color(0xFFE1E2EC),
   100: Color(0xFFB4B7D1),
   200: Color(0xFF8288B2),
