@@ -28,7 +28,7 @@ class _MenusState extends State<Menus> {
     return Scaffold(
       appBar: const MinimalAppBar(
         height: 65,
-        title: 'Lunch Menu',
+        title: 'Menus',
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
