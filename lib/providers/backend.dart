@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:pats4u/models/bug_report_model.dart';
 import 'package:pats4u/models/class.dart';
 import 'package:pats4u/models/event.dart';
 import 'package:pats4u/models/months.dart';
@@ -152,6 +153,17 @@ class Backend {
       } else {
         return WeekMenu();
       }
+    });
+  }
+
+  static Future<String> reportBug(BugReportModel bugReportModel) {
+    return Auth.getToken().then((token) {
+      return Dio().post(
+        baseURL + '/bugs/report',
+        data: jsonEncode(bugReportModel.toJSON()),
+      );
+    }).then((value) {
+      return value.data['response'] ?? '';
     });
   }
 }
