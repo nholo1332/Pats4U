@@ -248,14 +248,13 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
 
   twitterShare() {
     SocialShare.shareTwitter(
-      'This is Social Share twitter example',
+      'Join me at the ' + widget.event.title + ' event!',
       hashtags: [
-        'hello',
-        'world',
-        'foo',
-        'bar',
+        'clpatriots',
+        widget.event.eventType.name,
+        widget.event.location.replaceAll(' ', ''),
       ],
-      url:'https://your-url-here/',
+      url: widget.event.mapsLink != '' ? widget.event.mapsLink : null,
     ).catchError((_) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
