@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pats4u/models/lunch_menu_item.dart';
 import 'package:pats4u/models/week_menu.dart';
 import 'package:pats4u/providers/backend.dart';
@@ -159,6 +160,7 @@ class _MenusState extends State<Menus> {
   }
 
   Widget buildMenuItem(LunchMenuItem item, bool lunch) {
+    DateFormat dateFormat = DateFormat('MM/dd/yyyy');
     double width = MediaQuery.of(context).size.width * .8;
     return GestureDetector(
       child: Container(
@@ -225,7 +227,7 @@ class _MenusState extends State<Menus> {
                             children: [
                               Icon(
                                 lunch ? Icons.dinner_dining : Icons.breakfast_dining,
-                                size: 18,
+                                size: 16,
                               ),
                               const SizedBox(
                                 width: 3,
@@ -236,7 +238,7 @@ class _MenusState extends State<Menus> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.onBackground,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
@@ -245,7 +247,7 @@ class _MenusState extends State<Menus> {
                             children: [
                               const Icon(
                                 Icons.cake,
-                                size: 18,
+                                size: 16,
                               ),
                               const SizedBox(
                                 width: 3,
@@ -256,7 +258,27 @@ class _MenusState extends State<Menus> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.onBackground,
-                                  fontSize: 18,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.calendar_today,
+                                size: 16,
+                              ),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                dateFormat.format(item.date),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.onBackground,
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
