@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:pats4u/models/class.dart';
 import 'package:pats4u/models/event.dart';
+import 'package:pats4u/models/lunch_menu_item.dart';
 import 'package:pats4u/models/months.dart';
 import 'package:pats4u/models/staff_member.dart';
 import 'package:pats4u/models/user.dart';
+import 'package:pats4u/models/week_menu.dart';
 import 'package:pats4u/providers/auth.dart';
 import 'package:pats4u/providers/events_cache_manager.dart';
+import 'package:pats4u/providers/menu_cache_manager.dart';
 import 'package:pats4u/providers/staff_cache_manager.dart';
 import 'package:pats4u/providers/user_cache_manager.dart';
 
@@ -136,6 +139,20 @@ class Backend {
       );
     }).then((value) {
       return value.data['response'] ?? '';
+    });
+  }
+
+  static Future<WeekMenu> getWeekMenu(int week, {bool force = false}) async {
+    if ( force ) {
+      await MenuCacheManager().emptyCache();
+    }
+    return MenuCacheManager().getSingleFile(baseURL + '/menus/all/' + DateTime.now().year.toString() + '/' + week.toString()).then((value) async {
+      if ( await value.exists() ) {
+        var res = await value.readAsString();
+        return WeekMenu.fromJson(jsonDecode(res));
+      } else {
+        return WeekMenu();
+      }
     });
   }
 }
