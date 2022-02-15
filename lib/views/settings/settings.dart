@@ -228,6 +228,96 @@ class _SettingsState extends State<Settings> {
         ),
       ),
     );
+    items.add(
+      const SizedBox(
+        height: 25,
+      ),
+    );
+    items.add(
+      Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 25,
+            ),
+            child: Text(
+              'Packages and Licenses',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    items.add(
+      Padding(
+        padding: const EdgeInsets.only(
+          left: 25,
+          right: 25,
+          top: 10,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'View licenses of used packages and elements of this app.',
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    items.add(
+      Padding(
+        padding: const EdgeInsets.only(
+          left: 25,
+          right: 25,
+          top: 10,
+        ),
+        child: Row(
+          children: [
+            OutlinedButton(
+              child: Text(
+                'Licenses',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              onPressed: () {
+                showLicensePage(
+                  context: context,
+                  applicationName: 'Pats4U',
+                  applicationVersion: Constants.packageInfo?.version ?? '',
+                  applicationIcon: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minWidth: 120,
+                      minHeight: 120,
+                      maxWidth: 120,
+                      maxHeight: 120,
+                    ),
+                    child: Image.asset(
+                      'assets/images/CLPats.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                  applicationLegalese: 'Pats4U - created by Clarkson-Leigh FBLA '
+                      'chapter Mobile Application Development group - Mitchel Beeson, '
+                      'Noah Holoubek, and Samuel Pocasangre',
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
     return items;
   }
 }
