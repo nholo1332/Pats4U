@@ -3,7 +3,6 @@ import 'package:pats4u/models/staff_member.dart';
 import 'package:pats4u/widgets/image_container.dart';
 
 class StaffItem extends StatelessWidget {
-
   final StaffMember staffMember;
   final GestureTapCallback? onTap;
   final double size;
@@ -69,12 +68,10 @@ class StaffItem extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Expanded(
-                            child: Text(
-                              staffMember.bio.substring(0, 50),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontSize: 13)
-                            ),
+                            child: Text(staffMember.bio.substring(0, 50),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 13)),
                           ),
                         ],
                       ),

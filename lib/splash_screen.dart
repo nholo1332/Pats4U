@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Constants().init();
     // Pull application information (version, build, etc.) from compiled package
     Constants.packageInfo = await PackageInfo.fromPlatform();
-    if ( Auth.getUser() != null ) {
+    if (Auth.getUser() != null) {
       Backend.getUserData().then((value) {
         Constants.userData = value;
         Navigator.of(context).pushReplacement(
@@ -77,9 +77,8 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 175,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/CLPats.png'),
-                  fit: BoxFit.fitHeight
-              ),
+                  image: AssetImage('assets/images/CLPats.png'),
+                  fit: BoxFit.fitHeight),
             ),
           ),
           CircularProgressIndicator(

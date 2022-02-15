@@ -55,8 +55,7 @@ class _HomeFeedState extends State<HomeFeed> {
           decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/CLPats.png'),
-                fit: BoxFit.fitHeight
-            ),
+                fit: BoxFit.fitHeight),
           ),
         ),
       ),

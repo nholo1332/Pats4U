@@ -1,5 +1,4 @@
 class Class {
-
   String id = '';
   String title = '';
   String teacher = '';
@@ -15,5 +14,4 @@ class Class {
     description = json['description'] ?? '';
     period = json['period'] ?? 0;
   }
-
 }

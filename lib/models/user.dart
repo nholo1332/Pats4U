@@ -1,5 +1,4 @@
 class User {
-
   String name = '';
 
   User();
@@ -7,5 +6,4 @@ class User {
   User.fromJson(Map<String, dynamic> json) {
     name = json['name'] ?? '';
   }
-
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/models/event_types.dart';
 
 class EventHelpers {
-
   static IconData getIcon(EventTypes eventType) {
     switch (eventType) {
       case EventTypes.basketball:
@@ -23,5 +22,4 @@ class EventHelpers {
         return Icons.local_activity;
     }
   }
-
 }

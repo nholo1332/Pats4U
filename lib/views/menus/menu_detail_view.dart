@@ -37,7 +37,9 @@ class _MenuDetailViewState extends State<MenuDetailView> {
         leftAction: () {
           Navigator.of(context).pop();
         },
-        leftIconColor: widget.item.image != '' ? null : Theme.of(context).colorScheme.secondary,
+        leftIconColor: widget.item.image != ''
+            ? null
+            : Theme.of(context).colorScheme.secondary,
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
@@ -95,7 +97,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
         ],
       ),
     );
-    if ( widget.item.desert != '' ) {
+    if (widget.item.desert != '') {
       items.add(
         const SizedBox(
           height: 15,
@@ -115,7 +117,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
         ),
       );
     }
-    if ( widget.item.sides.isNotEmpty ) {
+    if (widget.item.sides.isNotEmpty) {
       items.add(
         const SizedBox(
           height: 25,
@@ -151,7 +153,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
         ),
       );
     }
-    if ( widget.item.extras.isNotEmpty ) {
+    if (widget.item.extras.isNotEmpty) {
       items.add(
         const SizedBox(
           height: 25,
@@ -221,7 +223,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
   }
 
   Widget buildImage(LunchMenuItem item, double width) {
-    if ( item.image != '' ) {
+    if (item.image != '') {
       return ImageContainer(
         image: item.image,
         borderRadius: const BorderRadius.vertical(
@@ -248,7 +250,8 @@ class _MenuDetailViewState extends State<MenuDetailView> {
             item.day.toUpperCase().substring(0, 3),
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical * 5,
-              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
+              color:
+                  Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
               fontWeight: FontWeight.w600,
             ),
           ),

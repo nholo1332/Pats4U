@@ -29,7 +29,7 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   void initState() {
     super.initState();
-    if ( widget.editEvent != null && ( widget.editEvent ?? Event() ).id != '' ) {
+    if (widget.editEvent != null && (widget.editEvent ?? Event()).id != '') {
       event = widget.editEvent!;
     } else {
       event.isUserEvent = true;
@@ -141,7 +141,7 @@ class _CreateEventState extends State<CreateEvent> {
         onTap: selectDate,
       ),
     );
-    if ( !event.allDay ) {
+    if (!event.allDay) {
       items.add(
         ListTile(
           title: const Text('Time'),
@@ -271,20 +271,24 @@ class _CreateEventState extends State<CreateEvent> {
                     IconButton(
                       icon: const Icon(Icons.link),
                       color: Theme.of(context).colorScheme.onBackground,
-                      onPressed: saving ? null : () async {
-                        if ( await canLaunch(event.links[index].link) ) {
-                          launch(event.links[index].link);
-                        }
-                      },
+                      onPressed: saving
+                          ? null
+                          : () async {
+                              if (await canLaunch(event.links[index].link)) {
+                                launch(event.links[index].link);
+                              }
+                            },
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete),
                       color: Theme.of(context).colorScheme.error,
-                      onPressed: saving ? null : () {
-                        setState(() {
-                          event.links.removeAt(index);
-                        });
-                      },
+                      onPressed: saving
+                          ? null
+                          : () {
+                              setState(() {
+                                event.links.removeAt(index);
+                              });
+                            },
                     ),
                   ],
                 ),
@@ -313,7 +317,7 @@ class _CreateEventState extends State<CreateEvent> {
         height: 25,
       ),
     );
-    if ( event.id == '' ) {
+    if (event.id == '') {
       items.add(
         const Center(
           child: Text('This event is only viewable by you.'),
@@ -339,15 +343,16 @@ class _CreateEventState extends State<CreateEvent> {
             borderRadius: BorderRadius.circular(14),
             child: Center(
               child: saving
-                ? CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary),
-                )
-                : Text(
-                  event.id == '' ? 'Create' : 'Save',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                ),
+                  ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).colorScheme.onPrimary),
+                    )
+                  : Text(
+                      event.id == '' ? 'Create' : 'Save',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
             ),
           ),
         ),
@@ -368,10 +373,10 @@ class _CreateEventState extends State<CreateEvent> {
       lastDate: DateTime(DateTime.now().year, 12, 31),
       initialDate: event.dateTime,
     );
-    if ( date != null ) {
+    if (date != null) {
       setState(() {
         event.dateTime = date;
-      }); 
+      });
     }
   }
 
@@ -380,9 +385,10 @@ class _CreateEventState extends State<CreateEvent> {
       context: context,
       initialTime: TimeOfDay.fromDateTime(event.dateTime),
     );
-    if ( t != null ) {
+    if (t != null) {
       setState(() {
-        event.dateTime = DateTime(event.dateTime.year, event.dateTime.month, event.dateTime.day, t.hour, t.minute);
+        event.dateTime = DateTime(event.dateTime.year, event.dateTime.month,
+            event.dateTime.day, t.hour, t.minute);
       });
     }
   }
@@ -400,7 +406,8 @@ class _CreateEventState extends State<CreateEvent> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                    color:
+                        Theme.of(context).colorScheme.shadow.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: TextFormField(
@@ -421,7 +428,8 @@ class _CreateEventState extends State<CreateEvent> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                    color:
+                        Theme.of(context).colorScheme.shadow.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: TextFormField(
@@ -450,9 +458,10 @@ class _CreateEventState extends State<CreateEvent> {
             TextButton(
               child: const Text('Add'),
               onPressed: () {
-                if ( eventLink.name != '' && eventLink.link != '' ) {
+                if (eventLink.name != '' && eventLink.link != '') {
                   setState(() {
-                    if ( !eventLink.link.contains('http://') || !eventLink.link.contains('https://') ) {
+                    if (!eventLink.link.contains('http://') ||
+                        !eventLink.link.contains('https://')) {
                       eventLink.link = 'https://' + eventLink.link;
                     }
                     event.links.add(eventLink);
@@ -468,7 +477,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   saveEvent() {
-    if ( event.title != '' && event.id == '' ) {
+    if (event.title != '' && event.id == '') {
       setState(() {
         saving = true;
       });
@@ -486,12 +495,12 @@ class _CreateEventState extends State<CreateEvent> {
             ),
             action: SnackBarAction(
               label: 'Ok',
-              onPressed: () { },
+              onPressed: () {},
             ),
           ),
         );
       });
-    } else if ( event.title != '' && event.id != '' ) {
+    } else if (event.title != '' && event.id != '') {
       setState(() {
         saving = true;
       });
@@ -509,7 +518,7 @@ class _CreateEventState extends State<CreateEvent> {
             ),
             action: SnackBarAction(
               label: 'Ok',
-              onPressed: () { },
+              onPressed: () {},
             ),
           ),
         );
@@ -524,7 +533,7 @@ class _CreateEventState extends State<CreateEvent> {
           action: SnackBarAction(
             label: 'Ok',
             textColor: Theme.of(context).colorScheme.onError,
-            onPressed: () { },
+            onPressed: () {},
           ),
         ),
       );

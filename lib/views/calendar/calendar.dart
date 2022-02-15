@@ -19,7 +19,8 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  StreamController<CalendarStreamEvent> dateStreamController = StreamController<CalendarStreamEvent>();
+  StreamController<CalendarStreamEvent> dateStreamController =
+      StreamController<CalendarStreamEvent>();
 
   @override
   void initState() {
@@ -50,12 +51,13 @@ class _CalendarState extends State<Calendar> {
             lastDate: DateTime(DateTime.now().year, 12, 31),
             dayColor: Theme.of(context).colorScheme.primary,
             activeDayColor: Theme.of(context).colorScheme.onSecondary,
-            activeBackgroundDayColor:Theme.of(context).colorScheme.secondary,
-            dotsColor: Theme.of(context).colorScheme.onSecondary.withOpacity(0.9),
+            activeBackgroundDayColor: Theme.of(context).colorScheme.secondary,
+            dotsColor:
+                Theme.of(context).colorScheme.onSecondary.withOpacity(0.9),
             leftMargin: 40,
             locale: 'en_ISO',
             onDateSelected: (date) {
-              if ( date != null ) {
+              if (date != null) {
                 dateStreamController.add(CalendarStreamEvent.create(date));
               }
             },
@@ -69,14 +71,14 @@ class _CalendarState extends State<Calendar> {
   }
 
   addButtonClick() {
-    if ( Auth.getUser() != null ) {
+    if (Auth.getUser() != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const CreateEvent(),
         ),
       ).then((value) {
-        if ( value == true ) {
+        if (value == true) {
           dateStreamController.add(
             CalendarStreamEvent.create(
               DateTime.now(),
@@ -95,7 +97,8 @@ class _CalendarState extends State<Calendar> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: const <Widget>[
-                  Text('Before adding events to your calendar, you must first login.'),
+                  Text(
+                      'Before adding events to your calendar, you must first login.'),
                 ],
               ),
             ),

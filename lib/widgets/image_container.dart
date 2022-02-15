@@ -41,48 +41,51 @@ class ImageContainer extends StatelessWidget {
         color: bgColor,
         borderRadius: borderRadius ?? BorderRadius.circular(radius),
         boxShadow: [
-          if ( isShadow ) BoxShadow(
-            color: Theme.of(context).colorScheme.shadow.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(0, 1),
-          ),
+          if (isShadow)
+            BoxShadow(
+              color: Theme.of(context).colorScheme.shadow.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: const Offset(0, 1),
+            ),
         ],
       ),
       child: isNetwork
-      ? FutureBuilder(
-        future: StaffImageCacheManager().getSingleFile(image),
-        builder: (context, AsyncSnapshot<File> snapshot) {
-          if ( snapshot.connectionState == ConnectionState.done && snapshot.data != null ) {
-            //imageFilePath = snapshot.data!.path;
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: borderRadius ?? BorderRadius.circular(radius),
-                image: DecorationImage(
-                  image: FileImage(snapshot.data!),
-                  fit: fit,
-                ),
-              ),
-            );
-          } else {
-            return const SizedBox(
-              height: 100,
-              width: 100,
-              child: Center(
-                child: SizedBox(
-                  height: 30,
-                  width: 30,
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            );
-          }
-        },
-      )
-      : Image(
-        image: AssetImage(image),
-        fit: fit,
-      ),
+          ? FutureBuilder(
+              future: StaffImageCacheManager().getSingleFile(image),
+              builder: (context, AsyncSnapshot<File> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.data != null) {
+                  //imageFilePath = snapshot.data!.path;
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          borderRadius ?? BorderRadius.circular(radius),
+                      image: DecorationImage(
+                        image: FileImage(snapshot.data!),
+                        fit: fit,
+                      ),
+                    ),
+                  );
+                } else {
+                  return const SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Center(
+                      child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  );
+                }
+              },
+            )
+          : Image(
+              image: AssetImage(image),
+              fit: fit,
+            ),
     );
   }
 

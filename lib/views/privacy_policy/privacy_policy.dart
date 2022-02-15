@@ -49,8 +49,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/CLPats.png'),
-                fit: BoxFit.fitHeight
-            ),
+                fit: BoxFit.fitHeight),
           ),
         ),
       ),
@@ -67,7 +66,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             return rootBundle.loadString('assets/policies/privacy.md');
           }),
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            if ( snapshot.data != null ) {
+            if (snapshot.data != null) {
               return Markdown(
                 data: snapshot.data!,
               );

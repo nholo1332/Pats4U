@@ -1,5 +1,4 @@
 class BugReportModel {
-
   String location = '';
   String description = '';
   String reproductionSteps = '';
@@ -22,5 +21,4 @@ class BugReportModel {
       'deviceInfo': deviceInfo,
     };
   }
-
 }

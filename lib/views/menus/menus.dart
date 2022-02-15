@@ -36,7 +36,7 @@ class _MenusState extends State<Menus> {
       body: FutureBuilder(
         future: Backend.getWeekMenu(MenuHelpers.weekNumber(DateTime.now())),
         builder: (BuildContext context, AsyncSnapshot<WeekMenu> snapshot) {
-          if ( snapshot.data != null ) {
+          if (snapshot.data != null) {
             return buildBody(snapshot.data!);
           } else {
             return const Center(
@@ -60,7 +60,7 @@ class _MenusState extends State<Menus> {
 
   Widget buildBody(WeekMenu menuItems) {
     List<Widget> items = [];
-    if ( menuItems.breakfast.isNotEmpty ) {
+    if (menuItems.breakfast.isNotEmpty) {
       items.add(
         Row(
           children: [
@@ -72,7 +72,7 @@ class _MenusState extends State<Menus> {
                 'Breakfast',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize:  SizeConfig.blockSizeVertical * 2.5,
+                  fontSize: SizeConfig.blockSizeVertical * 2.5,
                 ),
               ),
             ),
@@ -100,14 +100,14 @@ class _MenusState extends State<Menus> {
         ),
       );
     }
-    if ( menuItems.breakfast.isNotEmpty && menuItems.lunch.isNotEmpty ) {
+    if (menuItems.breakfast.isNotEmpty && menuItems.lunch.isNotEmpty) {
       items.add(
         const SizedBox(
           height: 25,
         ),
       );
     }
-    if ( menuItems.lunch.isNotEmpty ) {
+    if (menuItems.lunch.isNotEmpty) {
       items.add(
         Row(
           children: [
@@ -119,7 +119,7 @@ class _MenusState extends State<Menus> {
                 'Lunch',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize:  SizeConfig.blockSizeVertical * 2.5,
+                  fontSize: SizeConfig.blockSizeVertical * 2.5,
                 ),
               ),
             ),
@@ -209,7 +209,8 @@ class _MenusState extends State<Menus> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                color: Theme.of(context).colorScheme.onBackground,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -226,7 +227,9 @@ class _MenusState extends State<Menus> {
                           Row(
                             children: [
                               Icon(
-                                lunch ? Icons.dinner_dining : Icons.breakfast_dining,
+                                lunch
+                                    ? Icons.dinner_dining
+                                    : Icons.breakfast_dining,
                                 size: 16,
                               ),
                               const SizedBox(
@@ -237,32 +240,37 @@ class _MenusState extends State<Menus> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  color: Theme.of(context).colorScheme.onBackground,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                   fontSize: 16,
                                 ),
                               ),
                             ],
                           ),
-                          if ( lunch && item.desert != '' ) Row(
-                            children: [
-                              const Icon(
-                                Icons.cake,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                'Desert',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.onBackground,
-                                  fontSize: 16,
+                          if (lunch && item.desert != '')
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.cake,
+                                  size: 16,
                                 ),
-                              ),
-                            ],
-                          ),
+                                const SizedBox(
+                                  width: 3,
+                                ),
+                                Text(
+                                  'Desert',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
                           Row(
                             children: [
                               const Icon(
@@ -277,7 +285,9 @@ class _MenusState extends State<Menus> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  color: Theme.of(context).colorScheme.onBackground,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                   fontSize: 16,
                                 ),
                               ),
@@ -308,7 +318,7 @@ class _MenusState extends State<Menus> {
   }
 
   Widget buildImage(LunchMenuItem item, double width) {
-    if ( item.image != '' ) {
+    if (item.image != '') {
       return ImageContainer(
         image: item.image,
         borderRadius: const BorderRadius.vertical(
@@ -335,7 +345,8 @@ class _MenusState extends State<Menus> {
             item.day.toUpperCase().substring(0, 3),
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical * 5,
-              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
+              color:
+                  Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
               fontWeight: FontWeight.w600,
             ),
           ),

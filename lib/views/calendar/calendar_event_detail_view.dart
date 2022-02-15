@@ -80,7 +80,10 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
             width: 70,
           ),
           Text(
-            dateFormat.format(widget.event.dateTime) + ( widget.event.allDay ? ' - All-Day Event' : timeFormat.format(widget.event.dateTime)),
+            dateFormat.format(widget.event.dateTime) +
+                (widget.event.allDay
+                    ? ' - All-Day Event'
+                    : timeFormat.format(widget.event.dateTime)),
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical * 1.7,
               fontWeight: FontWeight.w400,
@@ -89,7 +92,7 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
         ],
       ),
     );
-    if ( widget.event.location != '' || widget.event.mapsLink != '' ) {
+    if (widget.event.location != '' || widget.event.mapsLink != '') {
       items.add(
         const SizedBox(
           height: 25,
@@ -104,19 +107,23 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
                 title: Text(
                   widget.event.location,
                 ),
-                subtitle: widget.event.mapsLink != '' ? const Text('Click for directions') : null,
-                onTap: widget.event.mapsLink != '' ? () async {
-                  if ( await canLaunch(widget.event.mapsLink) ) {
-                    launch(widget.event.mapsLink);
-                  }
-                } : null,
+                subtitle: widget.event.mapsLink != ''
+                    ? const Text('Click for directions')
+                    : null,
+                onTap: widget.event.mapsLink != ''
+                    ? () async {
+                        if (await canLaunch(widget.event.mapsLink)) {
+                          launch(widget.event.mapsLink);
+                        }
+                      }
+                    : null,
               ),
             ),
           ],
         ),
       );
     }
-    if ( widget.event.links.isNotEmpty ) {
+    if (widget.event.links.isNotEmpty) {
       items.add(
         const SizedBox(
           height: 25,
@@ -151,7 +158,7 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
                     overflow: TextOverflow.fade,
                   ),
                   onTap: () async {
-                    if ( await canLaunch(widget.event.links[index].link) ) {
+                    if (await canLaunch(widget.event.links[index].link)) {
                       launch(widget.event.links[index].link);
                     }
                   },
@@ -162,7 +169,7 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
         ),
       );
     }
-    if ( widget.event.isUserEvent ) {
+    if (widget.event.isUserEvent) {
       items.add(
         const SizedBox(
           height: 25,

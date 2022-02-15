@@ -32,12 +32,12 @@ class DayItem extends StatelessWidget {
 
   _buildDay(BuildContext context) {
     final textStyle = TextStyle(
-      color: available
-        ? dayColor ?? Theme.of(context).colorScheme.secondary
-        : dayColor?.withOpacity(0.5) ??
-        Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-      fontSize: 32,
-      fontWeight: FontWeight.normal);
+        color: available
+            ? dayColor ?? Theme.of(context).colorScheme.secondary
+            : dayColor?.withOpacity(0.5) ??
+                Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+        fontSize: 32,
+        fontWeight: FontWeight.normal);
     final selectedStyle = TextStyle(
       color: activeDayColor ?? Colors.white,
       fontSize: 32,
@@ -48,12 +48,13 @@ class DayItem extends StatelessWidget {
     return GestureDetector(
       onTap: available ? onTap as void Function()? : null,
       child: Container(
-        decoration: isSelected ? BoxDecoration(
-          color:
-          activeDayBackgroundColor ?? Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadius.circular(12.0),
-        )
-        : const BoxDecoration(color: Colors.transparent),
+        decoration: isSelected
+            ? BoxDecoration(
+                color: activeDayBackgroundColor ??
+                    Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(12.0),
+              )
+            : const BoxDecoration(color: Colors.transparent),
         height: height,
         width: width,
         child: Column(
@@ -68,14 +69,15 @@ class DayItem extends StatelessWidget {
               dayNumber.toString(),
               style: isSelected ? selectedStyle : textStyle,
             ),
-            if (isSelected) Text(
-              shortName,
-              style: TextStyle(
-                color: dayNameColor ?? activeDayColor ?? Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
+            if (isSelected)
+              Text(
+                shortName,
+                style: TextStyle(
+                  color: dayNameColor ?? activeDayColor ?? Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
               ),
-            ),
           ],
         ),
       ),

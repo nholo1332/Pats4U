@@ -1,5 +1,4 @@
 class LunchMenuItem {
-
   String day = '';
   String main = '';
   List<String> sides = [];
@@ -19,5 +18,4 @@ class LunchMenuItem {
     image = json['image'] ?? '';
     date = json['date'] != null ? DateTime.parse(json['date']) : DateTime.now();
   }
-
 }

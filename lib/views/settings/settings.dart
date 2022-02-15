@@ -43,7 +43,7 @@ class _SettingsState extends State<Settings> {
 
   List<Widget> buildBody() {
     List<Widget> items = [];
-    if ( Constants.userData.name != '' ) {
+    if (Constants.userData.name != '') {
       items.add(
         Container(
           padding: const EdgeInsets.symmetric(
@@ -65,13 +65,12 @@ class _SettingsState extends State<Settings> {
             ),
             title: Text(Constants.userData.name),
             trailing: IconButton(
-              icon: const Icon(Icons.exit_to_app),
-              tooltip: 'Logout',
-              onPressed: () async {
-                await Auth.signOut();
-                setState(() { });
-              }
-            ),
+                icon: const Icon(Icons.exit_to_app),
+                tooltip: 'Logout',
+                onPressed: () async {
+                  await Auth.signOut();
+                  setState(() {});
+                }),
           ),
         ),
       );
@@ -92,7 +91,7 @@ class _SettingsState extends State<Settings> {
               'Privacy Policy',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                fontSize: SizeConfig.blockSizeVertical * 2.2,
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
@@ -168,7 +167,7 @@ class _SettingsState extends State<Settings> {
               'Bug Report',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                fontSize: SizeConfig.blockSizeVertical * 2.2,
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
@@ -244,7 +243,7 @@ class _SettingsState extends State<Settings> {
               'Packages and Licenses',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                fontSize: SizeConfig.blockSizeVertical * 2.2,
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
@@ -308,7 +307,8 @@ class _SettingsState extends State<Settings> {
                       fit: BoxFit.fitHeight,
                     ),
                   ),
-                  applicationLegalese: 'Pats4U - created by Clarkson-Leigh FBLA '
+                  applicationLegalese:
+                      'Pats4U - created by Clarkson-Leigh FBLA '
                       'chapter Mobile Application Development group - Mitchel Beeson, '
                       'Noah Holoubek, and Samuel Pocasangre',
                 );

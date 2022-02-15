@@ -1,5 +1,4 @@
 class Hobby {
-
   String title = '';
   String description = '';
   int icon = 0;
@@ -10,8 +9,7 @@ class Hobby {
     title = json['title'] ?? '';
     description = json['description'] ?? '';
     icon = int.tryParse((json['icon'] ?? 'a').toString()) != null
-      ? int.parse((json['icon']).toString())
-      : 0;
+        ? int.parse((json['icon']).toString())
+        : 0;
   }
-
 }

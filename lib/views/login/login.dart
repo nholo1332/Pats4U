@@ -44,7 +44,10 @@ class _LoginState extends State<Login> {
                     children: [
                       Ink(
                         decoration: ShapeDecoration(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.7),
                           shape: const CircleBorder(),
                         ),
                         child: IconButton(
@@ -83,7 +86,10 @@ class _LoginState extends State<Login> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -107,7 +113,10 @@ class _LoginState extends State<Login> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -141,21 +150,21 @@ class _LoginState extends State<Login> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: loading
-                            ? null
-                            : login,
+                        onTap: loading ? null : login,
                         borderRadius: BorderRadius.circular(14),
                         child: Center(
                           child: loading
                               ? CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary),
-                          )
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Theme.of(context).colorScheme.onPrimary),
+                                )
                               : Text(
-                            'Login',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
+                                  'Login',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
@@ -177,13 +186,13 @@ class _LoginState extends State<Login> {
                         onTap: loading
                             ? null
                             : () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Register(),
-                            ),
-                          );
-                        },
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Register(),
+                                  ),
+                                );
+                              },
                         child: Text(
                           'Register',
                           style: TextStyle(
@@ -207,7 +216,7 @@ class _LoginState extends State<Login> {
   }
 
   login() {
-    if ( email != '' && password != '' && !loading ) {
+    if (email != '' && password != '' && !loading) {
       setState(() {
         loading = true;
       });
@@ -229,12 +238,12 @@ class _LoginState extends State<Login> {
             ),
             action: SnackBarAction(
               label: 'Ok',
-              onPressed: () { },
+              onPressed: () {},
             ),
           ),
         );
       });
-    } else if ( !loading ) {
+    } else if (!loading) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Please enter an email and password'),
@@ -243,7 +252,7 @@ class _LoginState extends State<Login> {
           ),
           action: SnackBarAction(
             label: 'Ok',
-            onPressed: () { },
+            onPressed: () {},
           ),
         ),
       );

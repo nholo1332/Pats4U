@@ -1,5 +1,4 @@
 class FunFact {
-
   String title = '';
   String description = '';
 
@@ -9,5 +8,4 @@ class FunFact {
     title = json['title'] ?? '';
     description = json['description'] ?? '';
   }
-
 }

@@ -44,7 +44,10 @@ class _RegisterState extends State<Register> {
                     children: [
                       Ink(
                         decoration: ShapeDecoration(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.7),
                           shape: const CircleBorder(),
                         ),
                         child: IconButton(
@@ -83,7 +86,10 @@ class _RegisterState extends State<Register> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -105,7 +111,10 @@ class _RegisterState extends State<Register> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -128,7 +137,10 @@ class _RegisterState extends State<Register> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -161,21 +173,21 @@ class _RegisterState extends State<Register> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: loading
-                            ? null
-                            : register,
+                        onTap: loading ? null : register,
                         borderRadius: BorderRadius.circular(14),
                         child: Center(
                           child: loading
                               ? CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary),
-                          )
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Theme.of(context).colorScheme.onPrimary),
+                                )
                               : Text(
-                            'Register',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
+                                  'Register',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
@@ -197,8 +209,8 @@ class _RegisterState extends State<Register> {
                         onTap: loading
                             ? null
                             : () {
-                          Navigator.of(context).pop();
-                        },
+                                Navigator.of(context).pop();
+                              },
                         child: Text(
                           'Login',
                           style: TextStyle(
@@ -222,7 +234,7 @@ class _RegisterState extends State<Register> {
   }
 
   register() {
-    if ( name != '' && email != '' && password != '' && !loading ) {
+    if (name != '' && email != '' && password != '' && !loading) {
       setState(() {
         loading = true;
       });
@@ -246,12 +258,12 @@ class _RegisterState extends State<Register> {
             ),
             action: SnackBarAction(
               label: 'Ok',
-              onPressed: () { },
+              onPressed: () {},
             ),
           ),
         );
       });
-    } else if ( !loading ) {
+    } else if (!loading) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Please enter a name, email, and password'),
@@ -260,7 +272,7 @@ class _RegisterState extends State<Register> {
           ),
           action: SnackBarAction(
             label: 'Ok',
-            onPressed: () { },
+            onPressed: () {},
           ),
         ),
       );

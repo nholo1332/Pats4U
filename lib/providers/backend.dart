@@ -18,13 +18,17 @@ class Backend {
   static const String baseURL = 'http://noahs-macbook-pro.local:3000';
 
   static Future<List<StaffMember>> getStaffMembers({bool force = false}) async {
-    if ( force ) {
+    if (force) {
       await StaffCacheManager().emptyCache();
     }
-    return StaffCacheManager().getSingleFile(baseURL + '/staff/all').then((value) async {
-      if ( await value.exists() ) {
+    return StaffCacheManager()
+        .getSingleFile(baseURL + '/staff/all')
+        .then((value) async {
+      if (await value.exists()) {
         var res = await value.readAsString();
-        return (json.decode(res) as List).map((s) => StaffMember.fromJson(s)).toList();
+        return (json.decode(res) as List)
+            .map((s) => StaffMember.fromJson(s))
+            .toList();
       } else {
         return [];
       }
@@ -32,22 +36,27 @@ class Backend {
   }
 
   static Future<List<Class>> getClasses() {
-    return StaffCacheManager().getSingleFile(baseURL + '/class/all').then((value) async {
-      if ( await value.exists() ) {
+    return StaffCacheManager()
+        .getSingleFile(baseURL + '/class/all')
+        .then((value) async {
+      if (await value.exists()) {
         var res = await value.readAsString();
-        return (json.decode(res) as List).map((s) => Class.fromJson(s)).toList();
+        return (json.decode(res) as List)
+            .map((s) => Class.fromJson(s))
+            .toList();
       } else {
         return [];
       }
     });
   }
 
-  static Future<List<Event>> getMonthEvents(Months month, {int year = 0, bool force = false}) async {
+  static Future<List<Event>> getMonthEvents(Months month,
+      {int year = 0, bool force = false}) async {
     Map<String, String> headers = {};
-    if ( year == 0 ) {
+    if (year == 0) {
       year = DateTime.now().year;
     }
-    if ( force ) {
+    if (force) {
       await EventsCacheManager().emptyCache();
     }
     await Auth.getToken().then((value) {
@@ -57,10 +66,17 @@ class Backend {
     }).catchError((_) {
       headers = {};
     });
-    return EventsCacheManager().getSingleFile(baseURL + '/events/all/' + year.toString() + '/' + month.name, headers: headers, ).then((value) async {
-      if ( await value.exists() ) {
+    return EventsCacheManager()
+        .getSingleFile(
+      baseURL + '/events/all/' + year.toString() + '/' + month.name,
+      headers: headers,
+    )
+        .then((value) async {
+      if (await value.exists()) {
         var res = await value.readAsString();
-        return (json.decode(res) as List).map((s) => Event.fromJson(s)).toList();
+        return (json.decode(res) as List)
+            .map((s) => Event.fromJson(s))
+            .toList();
       } else {
         return [];
       }
@@ -69,7 +85,7 @@ class Backend {
 
   static Future<User> getUserData({bool force = false}) async {
     Map<String, String> headers = {};
-    if ( force ) {
+    if (force) {
       await UserCacheManager().emptyCache();
     }
     await Auth.getToken().then((value) {
@@ -79,8 +95,10 @@ class Backend {
     }).catchError((_) {
       headers = {};
     });
-    return UserCacheManager().getSingleFile(baseURL + '/user/', headers: headers).then((value) async {
-      if ( await value.exists() ) {
+    return UserCacheManager()
+        .getSingleFile(baseURL + '/user/', headers: headers)
+        .then((value) async {
+      if (await value.exists()) {
         var res = await value.readAsString();
         return User.fromJson(jsonDecode(res));
       } else {
@@ -143,11 +161,17 @@ class Backend {
   }
 
   static Future<WeekMenu> getWeekMenu(int week, {bool force = false}) async {
-    if ( force ) {
+    if (force) {
       await MenuCacheManager().emptyCache();
     }
-    return MenuCacheManager().getSingleFile(baseURL + '/menus/all/' + DateTime.now().year.toString() + '/' + week.toString()).then((value) async {
-      if ( await value.exists() ) {
+    return MenuCacheManager()
+        .getSingleFile(baseURL +
+            '/menus/all/' +
+            DateTime.now().year.toString() +
+            '/' +
+            week.toString())
+        .then((value) async {
+      if (await value.exists()) {
         var res = await value.readAsString();
         return WeekMenu.fromJson(jsonDecode(res));
       } else {

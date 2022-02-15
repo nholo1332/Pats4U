@@ -1,5 +1,4 @@
 class EventLink {
-
   String name = '';
   String link = '';
 
@@ -16,5 +15,4 @@ class EventLink {
       'link': link,
     };
   }
-
 }

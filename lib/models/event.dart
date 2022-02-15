@@ -2,7 +2,6 @@ import 'package:pats4u/models/event_link.dart';
 import 'package:pats4u/models/event_types.dart';
 
 class Event {
-
   String id = '';
   String title = '';
   String description = '';
@@ -22,10 +21,17 @@ class Event {
     description = json['description'] ?? '';
     location = json['location'] ?? '';
     mapsLink = json['mapsLink'] ?? '';
-    eventType = json['eventType'] != null ? EventTypes.values.firstWhere((m) => m.name == json['eventType'], orElse: () => EventTypes.school) : EventTypes.school;
-    dateTime = json['dateTime'] != null ? DateTime.parse(json['dateTime']).toLocal() : DateTime.now();
+    eventType = json['eventType'] != null
+        ? EventTypes.values.firstWhere((m) => m.name == json['eventType'],
+            orElse: () => EventTypes.school)
+        : EventTypes.school;
+    dateTime = json['dateTime'] != null
+        ? DateTime.parse(json['dateTime']).toLocal()
+        : DateTime.now();
     allDay = json['allDay'] ?? false;
-    links = ((json['links'] ?? []) as List).map((l) => EventLink.fromJson(l)).toList();
+    links = ((json['links'] ?? []) as List)
+        .map((l) => EventLink.fromJson(l))
+        .toList();
     isUserEvent = json['isUserEvent'] ?? false;
   }
 
@@ -41,5 +47,4 @@ class Event {
       'isUserEvent': isUserEvent,
     };
   }
-
 }

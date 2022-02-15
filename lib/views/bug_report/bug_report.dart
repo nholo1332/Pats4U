@@ -28,13 +28,13 @@ class _BugReportState extends State<BugReport> {
   @override
   void initState() {
     super.initState();
-    if ( Platform.isIOS ) {
+    if (Platform.isIOS) {
       deviceInfo.iosInfo.then((value) {
         setState(() {
           iosInfo = value;
         });
       });
-    } else if ( Platform.isAndroid ) {
+    } else if (Platform.isAndroid) {
       deviceInfo.androidInfo.then((value) {
         setState(() {
           androidInfo = value;
@@ -92,7 +92,10 @@ class _BugReportState extends State<BugReport> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -115,7 +118,10 @@ class _BugReportState extends State<BugReport> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -139,7 +145,10 @@ class _BugReportState extends State<BugReport> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .shadow
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: TextFormField(
@@ -179,21 +188,21 @@ class _BugReportState extends State<BugReport> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: loading
-                            ? null
-                            : report,
+                        onTap: loading ? null : report,
                         borderRadius: BorderRadius.circular(14),
                         child: Center(
                           child: loading
                               ? CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary),
-                          )
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Theme.of(context).colorScheme.onPrimary),
+                                )
                               : Text(
-                            'Send',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
+                                  'Send',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
@@ -211,7 +220,10 @@ class _BugReportState extends State<BugReport> {
   }
 
   report() {
-    if ( bugReportModel.location != '' && bugReportModel.description != '' && bugReportModel.reproductionSteps != '' && !loading ) {
+    if (bugReportModel.location != '' &&
+        bugReportModel.description != '' &&
+        bugReportModel.reproductionSteps != '' &&
+        !loading) {
       setState(() {
         loading = true;
       });
@@ -238,12 +250,12 @@ class _BugReportState extends State<BugReport> {
             ),
             action: SnackBarAction(
               label: 'Ok',
-              onPressed: () { },
+              onPressed: () {},
             ),
           ),
         );
       });
-    } else if ( !loading ) {
+    } else if (!loading) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Please fill out all fields'),
@@ -252,7 +264,7 @@ class _BugReportState extends State<BugReport> {
           ),
           action: SnackBarAction(
             label: 'Ok',
-            onPressed: () { },
+            onPressed: () {},
           ),
         ),
       );
@@ -260,11 +272,20 @@ class _BugReportState extends State<BugReport> {
   }
 
   String getDeviceInfoText() {
-    if ( Platform.isIOS && iosInfo != null ) {
-      return 'iOS; ' + ( iosInfo?.utsname.machine ?? '' ) + '-' + ( iosInfo?.systemVersion ?? '' );
-    } else if ( Platform.isAndroid && androidInfo != null ) {
-      return 'Android; ' + (androidInfo?.device ?? '') + ',' + (androidInfo?.model ?? '') +
-          '-' + (androidInfo?.version.baseOS ?? '') + '.' + (androidInfo?.version.release ?? '');
+    if (Platform.isIOS && iosInfo != null) {
+      return 'iOS; ' +
+          (iosInfo?.utsname.machine ?? '') +
+          '-' +
+          (iosInfo?.systemVersion ?? '');
+    } else if (Platform.isAndroid && androidInfo != null) {
+      return 'Android; ' +
+          (androidInfo?.device ?? '') +
+          ',' +
+          (androidInfo?.model ?? '') +
+          '-' +
+          (androidInfo?.version.baseOS ?? '') +
+          '.' +
+          (androidInfo?.version.release ?? '');
     } else {
       return '';
     }

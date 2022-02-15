@@ -37,9 +37,11 @@ class _CalendarContentView extends State<CalendarContentView> {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: widget.dateStream,
-      builder: (BuildContext context, AsyncSnapshot<CalendarStreamEvent> snapshot) {
-        if ( snapshot.data != null ) {
-          return loadMonthEvents(snapshot.data!.dateTime, snapshot.data!.forceUpdate);
+      builder:
+          (BuildContext context, AsyncSnapshot<CalendarStreamEvent> snapshot) {
+        if (snapshot.data != null) {
+          return loadMonthEvents(
+              snapshot.data!.dateTime, snapshot.data!.forceUpdate);
         } else {
           return buildLoading();
         }
@@ -49,19 +51,27 @@ class _CalendarContentView extends State<CalendarContentView> {
 
   getTodayEvents(DateTime date) {
     final dateFormat = DateFormat('MM/dd/yyyy');
-    dayEvents = monthEvents.where((event) => dateFormat.format(event.dateTime) == dateFormat.format(date)).toList();
+    dayEvents = monthEvents
+        .where((event) =>
+            dateFormat.format(event.dateTime) == dateFormat.format(date))
+        .toList();
   }
 
   Widget loadMonthEvents(DateTime newDate, bool forceUpdate) {
     final dateFormat = DateFormat('MM/yyyy');
-    if ( selectedMonthEvents != null && dateFormat.format(newDate) == dateFormat.format(selectedMonthEvents ?? DateTime.now()) && !forceUpdate ) {
+    if (selectedMonthEvents != null &&
+        dateFormat.format(newDate) ==
+            dateFormat.format(selectedMonthEvents ?? DateTime.now()) &&
+        !forceUpdate) {
       getTodayEvents(newDate);
       return buildEvents();
     } else {
       return FutureBuilder(
-        future: Backend.getMonthEvents(Months.values[newDate.month - 1], force: forceUpdate),
+        future: Backend.getMonthEvents(Months.values[newDate.month - 1],
+            force: forceUpdate),
         builder: (BuildContext context, AsyncSnapshot<List<Event>> snapshot) {
-          if ( snapshot.connectionState == ConnectionState.done && snapshot.data != null ) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data != null) {
             selectedMonthEvents = newDate;
             monthEvents = snapshot.data!;
             getTodayEvents(newDate);
@@ -94,11 +104,12 @@ class _CalendarContentView extends State<CalendarContentView> {
     DateFormat dateFormat = DateFormat('h:mm');
     DateFormat amPmDateFormat = DateFormat('a');
     List<Widget> widgets = [];
-    List<Event> allDayEvents = dayEvents.where((event) => event.allDay).toList();
+    List<Event> allDayEvents =
+        dayEvents.where((event) => event.allDay).toList();
     allDayEvents.sort((a, b) => a.title.compareTo(b.title));
     List<Event> timeEvents = dayEvents.where((event) => !event.allDay).toList();
     timeEvents.sort((a, b) => a.dateTime.compareTo(b.dateTime));
-    if ( allDayEvents.isNotEmpty ) {
+    if (allDayEvents.isNotEmpty) {
       widgets.add(
         Row(
           children: [
@@ -127,19 +138,19 @@ class _CalendarContentView extends State<CalendarContentView> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  trailing: ( allDayEvents[index].isUserEvent )
+                  trailing: (allDayEvents[index].isUserEvent)
                       ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit),
-                            color: Theme.of(context).colorScheme.primary,
-                            onPressed: () {
-                              editEvent(allDayEvents[index]);
-                            },
-                          ),
-                        ],
-                      )
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              color: Theme.of(context).colorScheme.primary,
+                              onPressed: () {
+                                editEvent(allDayEvents[index]);
+                              },
+                            ),
+                          ],
+                        )
                       : null,
                   onTap: () {
                     openEvent(allDayEvents[index]);
@@ -151,7 +162,7 @@ class _CalendarContentView extends State<CalendarContentView> {
         ),
       );
     }
-    if ( allDayEvents.isNotEmpty && timeEvents.isNotEmpty ) {
+    if (allDayEvents.isNotEmpty && timeEvents.isNotEmpty) {
       widgets.add(
         const SizedBox(
           height: 25,
@@ -213,19 +224,19 @@ class _CalendarContentView extends State<CalendarContentView> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                trailing: ( timeEvents[index].isUserEvent )
+                trailing: (timeEvents[index].isUserEvent)
                     ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          color: Theme.of(context).colorScheme.primary,
-                          onPressed: () {
-                            editEvent(timeEvents[index]);
-                          },
-                        ),
-                      ],
-                    )
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            color: Theme.of(context).colorScheme.primary,
+                            onPressed: () {
+                              editEvent(timeEvents[index]);
+                            },
+                          ),
+                        ],
+                      )
                     : null,
                 onTap: () {
                   openEvent(timeEvents[index]);
@@ -236,7 +247,7 @@ class _CalendarContentView extends State<CalendarContentView> {
         ),
       ),
     );
-    if ( allDayEvents.isEmpty && timeEvents.isEmpty ) {
+    if (allDayEvents.isEmpty && timeEvents.isEmpty) {
       widgets.add(
         const SizedBox(
           height: 25,
@@ -287,9 +298,7 @@ class _CalendarContentView extends State<CalendarContentView> {
         ),
       ),
     ).then((value) => {
-      if ( value == true ) {
-        setState(() { })
-      }
-    });
+          if (value == true) {setState(() {})}
+        });
   }
 }

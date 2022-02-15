@@ -10,10 +10,8 @@ import 'package:url_launcher/url_launcher.dart';
 class StaffDetailView extends StatefulWidget {
   final StaffMember staffMember;
 
-  const StaffDetailView({
-    required this.staffMember,
-    Key? key
-  }) : super(key: key);
+  const StaffDetailView({required this.staffMember, Key? key})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -88,19 +86,23 @@ class _StaffDetailView extends State<StaffDetailView> {
             FutureBuilder(
               future: Backend.getClasses(),
               builder: (context, AsyncSnapshot<List<Class>> snapshot) {
-                if ( snapshot.connectionState == ConnectionState.done && snapshot.data != null ) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.data != null) {
                   return Row(
                     children: List.generate(
                       widget.staffMember.classes.length,
                       (index) {
                         return Chip(
                           label: Text(
-                            ((snapshot.data ?? []).firstWhere((c) => c.id == widget.staffMember.classes[index], orElse: () => Class())).title,
+                            ((snapshot.data ?? []).firstWhere(
+                                (c) =>
+                                    c.id == widget.staffMember.classes[index],
+                                orElse: () => Class())).title,
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary
-                            ),
+                                color: Theme.of(context).colorScheme.onPrimary),
                           ),
-                          backgroundColor: Theme.of(context).colorScheme.secondary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                         );
                       },
                     ),
@@ -123,7 +125,7 @@ class _StaffDetailView extends State<StaffDetailView> {
                   'Bio',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                    fontSize: SizeConfig.blockSizeVertical * 2.2,
                   ),
                 ),
               ],
@@ -150,7 +152,7 @@ class _StaffDetailView extends State<StaffDetailView> {
                   'Contact',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize:  SizeConfig.blockSizeVertical * 2.2,
+                    fontSize: SizeConfig.blockSizeVertical * 2.2,
                   ),
                 ),
               ],
@@ -158,45 +160,49 @@ class _StaffDetailView extends State<StaffDetailView> {
             const SizedBox(
               height: 5,
             ),
-            if ( widget.staffMember.email != '' ) Row(
-              children: [
-                const Icon(
-                  Icons.email,
-                ),
-                TextButton(
-                  onPressed: () async {
-                    if ( await canLaunch('mailto:' + widget.staffMember.email) ) {
-                      launch('mailto:' + widget.staffMember.email);
-                    }
-                  },
-                  child: Text(
-                    widget.staffMember.email,
+            if (widget.staffMember.email != '')
+              Row(
+                children: [
+                  const Icon(
+                    Icons.email,
                   ),
-                )
-              ],
-            ),
-            if ( widget.staffMember.phone != '' ) Row(
-              children: [
-                const Icon(
-                  Icons.call,
-                ),
-                TextButton(
-                  onPressed: () async {
-                    if ( await canLaunch('tel:' + widget.staffMember.phone) ) {
-                      launch('tel:' + widget.staffMember.phone);
-                    }
-                  },
-                  child: Text(
-                    widget.staffMember.phone,
+                  TextButton(
+                    onPressed: () async {
+                      if (await canLaunch(
+                          'mailto:' + widget.staffMember.email)) {
+                        launch('mailto:' + widget.staffMember.email);
+                      }
+                    },
+                    child: Text(
+                      widget.staffMember.email,
+                    ),
+                  )
+                ],
+              ),
+            if (widget.staffMember.phone != '')
+              Row(
+                children: [
+                  const Icon(
+                    Icons.call,
                   ),
-                )
-              ],
-            ),
+                  TextButton(
+                    onPressed: () async {
+                      if (await canLaunch('tel:' + widget.staffMember.phone)) {
+                        launch('tel:' + widget.staffMember.phone);
+                      }
+                    },
+                    child: Text(
+                      widget.staffMember.phone,
+                    ),
+                  )
+                ],
+              ),
           ],
         ),
       ),
     );
-    if ( widget.staffMember.hobbies.isNotEmpty || widget.staffMember.funFacts.isNotEmpty ) {
+    if (widget.staffMember.hobbies.isNotEmpty ||
+        widget.staffMember.funFacts.isNotEmpty) {
       items.add(
         Padding(
           padding: const EdgeInsets.only(
@@ -212,7 +218,7 @@ class _StaffDetailView extends State<StaffDetailView> {
                     'Get to Know ' + widget.staffMember.name.split(' ').first,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize:  SizeConfig.blockSizeVertical * 2.5,
+                      fontSize: SizeConfig.blockSizeVertical * 2.5,
                     ),
                   ),
                 ],
@@ -220,91 +226,98 @@ class _StaffDetailView extends State<StaffDetailView> {
               const SizedBox(
                 height: 25,
               ),
-              if ( widget.staffMember.hobbies.isNotEmpty ) Row(
-                children: [
-                  Text(
-                    'Hobbies',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize:  SizeConfig.blockSizeVertical * 2.2,
+              if (widget.staffMember.hobbies.isNotEmpty)
+                Row(
+                  children: [
+                    Text(
+                      'Hobbies',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeVertical * 2.2,
+                      ),
+                    ),
+                  ],
+                ),
+              if (widget.staffMember.hobbies.isNotEmpty)
+                Column(
+                  children: List.generate(
+                    widget.staffMember.hobbies.length,
+                    (index) => Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            leading: Icon(
+                              widget.staffMember.hobbies[index].icon != 0
+                                  ? IconData(
+                                      widget.staffMember.hobbies[index].icon)
+                                  : Icons.star,
+                            ),
+                            title: Text(
+                              widget.staffMember.hobbies[index].title,
+                            ),
+                            subtitle: Text(
+                              widget.staffMember.hobbies[index].description,
+                            ),
+                            onTap: () {
+                              openInfoDialog(
+                                widget.staffMember.hobbies[index].title +
+                                    ' - Hobby',
+                                widget.staffMember.hobbies[index].description,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              if ( widget.staffMember.hobbies.isNotEmpty ) Column(
-                children: List.generate(
-                  widget.staffMember.hobbies.length,
-                  (index) => Row(
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          leading: Icon(
-                            widget.staffMember.hobbies[index].icon != 0
-                                ? IconData(widget.staffMember.hobbies[index].icon)
-                                : Icons.star,
-                          ),
-                          title: Text(
-                            widget.staffMember.hobbies[index].title,
-                          ),
-                          subtitle: Text(
-                            widget.staffMember.hobbies[index].description,
-                          ),
-                          onTap: () {
-                            openInfoDialog(
-                              widget.staffMember.hobbies[index].title + ' - Hobby',
-                              widget.staffMember.hobbies[index].description,
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              ),
               const SizedBox(
                 height: 5,
               ),
-              if ( widget.staffMember.funFacts.isNotEmpty ) Row(
-                children: [
-                  Text(
-                    'Fun Facts',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize:  SizeConfig.blockSizeVertical * 2.2,
+              if (widget.staffMember.funFacts.isNotEmpty)
+                Row(
+                  children: [
+                    Text(
+                      'Fun Facts',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeVertical * 2.2,
+                      ),
+                    ),
+                  ],
+                ),
+              if (widget.staffMember.funFacts.isNotEmpty)
+                Column(
+                  children: List.generate(
+                    widget.staffMember.funFacts.length,
+                    (index) => Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            leading: const Icon(
+                              Icons.star_rate,
+                            ),
+                            title: Text(
+                              widget.staffMember.funFacts[index].title,
+                            ),
+                            subtitle: Text(
+                              widget.staffMember.funFacts[index].description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            onTap: () {
+                              openInfoDialog(
+                                widget.staffMember.funFacts[index].title +
+                                    ' - Fun Fact',
+                                widget.staffMember.funFacts[index].description,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              if ( widget.staffMember.funFacts.isNotEmpty ) Column(
-                children: List.generate(
-                  widget.staffMember.funFacts.length,
-                  (index) => Row(
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          leading: const Icon(
-                            Icons.star_rate,
-                          ),
-                          title: Text(
-                            widget.staffMember.funFacts[index].title,
-                          ),
-                          subtitle: Text(
-                            widget.staffMember.funFacts[index].description,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          onTap: () {
-                            openInfoDialog(
-                              widget.staffMember.funFacts[index].title + ' - Fun Fact',
-                              widget.staffMember.funFacts[index].description,
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              ),
               const SizedBox(
                 height: 45,
               ),
