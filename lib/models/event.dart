@@ -23,7 +23,7 @@ class Event {
     location = json['location'] ?? '';
     mapsLink = json['mapsLink'] ?? '';
     eventType = json['eventType'] != null ? EventTypes.values.firstWhere((m) => m.name == json['eventType'], orElse: () => EventTypes.school) : EventTypes.school;
-    dateTime = json['dateTime'] != null ? DateTime.parse(json['dateTime']) : DateTime.now();
+    dateTime = json['dateTime'] != null ? DateTime.parse(json['dateTime']).toLocal() : DateTime.now();
     allDay = json['allDay'] ?? false;
     links = ((json['links'] ?? []) as List).map((l) => EventLink.fromJson(l)).toList();
     isUserEvent = json['isUserEvent'] ?? false;
