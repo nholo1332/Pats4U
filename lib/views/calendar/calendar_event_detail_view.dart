@@ -61,12 +61,14 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
           const SizedBox(
             width: 30,
           ),
-          Text(
-            widget.event.title,
-            maxLines: 3,
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical * 2.2,
-              fontWeight: FontWeight.w500,
+          Expanded(
+            child: Text(
+              widget.event.title,
+              maxLines: 3,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical * 2.2,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],
