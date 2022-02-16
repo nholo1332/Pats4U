@@ -17,7 +17,8 @@ import 'package:pats4u/providers/staff_cache_manager.dart';
 import 'package:pats4u/providers/user_cache_manager.dart';
 
 class Backend {
-  static const String baseURL = 'http://noahs-macbook-pro.local:3000';
+  //static const String baseURL = 'http://noahs-macbook-pro.local:3000';
+  static const String baseURL = 'https://pats4u.clfbla.org';
 
   static Future<List<StaffMember>> getStaffMembers({bool force = false}) async {
     if (force) {
