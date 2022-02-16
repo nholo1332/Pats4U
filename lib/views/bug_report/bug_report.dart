@@ -78,7 +78,7 @@ class _BugReportState extends State<BugReport> {
                         height: 20,
                       ),
                       Image.asset(
-                        'assets/images/account_line.png',
+                        MediaQuery.of(context).platformBrightness == Brightness.light ? 'assets/images/account_line.png' : 'assets/images/account_line_darkmode.png',
                         width: 99,
                         height: 4,
                       ),
