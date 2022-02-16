@@ -4,12 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:pats4u/models/bug_report_model.dart';
 import 'package:pats4u/models/class.dart';
 import 'package:pats4u/models/event.dart';
+import 'package:pats4u/models/feed.dart';
 import 'package:pats4u/models/months.dart';
 import 'package:pats4u/models/staff_member.dart';
 import 'package:pats4u/models/user.dart';
 import 'package:pats4u/models/week_menu.dart';
 import 'package:pats4u/providers/auth.dart';
 import 'package:pats4u/providers/events_cache_manager.dart';
+import 'package:pats4u/providers/feed_cache_manager.dart';
 import 'package:pats4u/providers/menu_cache_manager.dart';
 import 'package:pats4u/providers/staff_cache_manager.dart';
 import 'package:pats4u/providers/user_cache_manager.dart';
@@ -188,6 +190,19 @@ class Backend {
       );
     }).then((value) {
       return value.data['response'] ?? '';
+    });
+  }
+
+  static Future<Feed> getFeed() {
+    return FeedCacheManager()
+        .getSingleFile(baseURL + '/feed/')
+        .then((value) async {
+      if (await value.exists()) {
+        var res = await value.readAsString();
+        return Feed.fromJson(json.decode(res));
+      } else {
+        return Feed();
+      }
     });
   }
 }
