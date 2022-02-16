@@ -3,12 +3,14 @@ import 'package:pats4u/models/event_update.dart';
 import 'package:pats4u/models/game_result.dart';
 
 class Feed {
+  // Create model variables
   List<GameResult> gameResults = [];
   List<EventUpdate> eventUpdates = [];
   List<Announcement> announcements = [];
 
   Feed();
 
+  // Convert JSON to data model variables
   Feed.fromJson(Map<String, dynamic> json) {
     gameResults = ((json['gameResults'] ?? []) as List)
         .map((m) => GameResult.fromJson(m))

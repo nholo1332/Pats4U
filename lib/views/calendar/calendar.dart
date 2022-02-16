@@ -25,6 +25,8 @@ class _CalendarState extends State<Calendar> {
   @override
   void initState() {
     super.initState();
+    /* Send current selected date to ensure the calendar content view displays
+    the correct date. Not doing so could prevent proper hot reloading */
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       dateStreamController.add(CalendarStreamEvent.create(DateTime.now()));
     });
@@ -32,6 +34,7 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
+    // Build the view
     dateStreamController.add(CalendarStreamEvent.create(DateTime.now()));
     return Scaffold(
       appBar: MinimalAppBar(
@@ -71,6 +74,8 @@ class _CalendarState extends State<Calendar> {
   }
 
   addButtonClick() {
+    /* Handle checking user's auth status and moving user to either the create
+    event view or sign in view */
     if (Auth.getUser() != null) {
       Navigator.push(
         context,
@@ -138,6 +143,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   openOptionsMenu() {
+    // Open menu to optionally force reload month data
     showMenu(
       context: context,
       position: const RelativeRect.fromLTRB(0, 0, 0, 0),

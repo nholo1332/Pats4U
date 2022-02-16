@@ -2,6 +2,7 @@ import 'package:pats4u/models/fun_fact.dart';
 import 'package:pats4u/models/hobby.dart';
 
 class StaffMember {
+  // Create model variables
   String id = '';
   String name = '';
   String picture = '';
@@ -14,6 +15,7 @@ class StaffMember {
 
   StaffMember();
 
+  // Convert JSON to data model variables
   StaffMember.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     name = json['name'] ?? '';

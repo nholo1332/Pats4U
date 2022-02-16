@@ -20,6 +20,7 @@ class Backend {
   //static const String baseURL = 'http://noahs-macbook-pro.local:3000';
   static const String baseURL = 'https://pats4u.clfbla.org';
 
+  // Gets the list of staff members from cache or from server
   static Future<List<StaffMember>> getStaffMembers({bool force = false}) async {
     if (force) {
       await StaffCacheManager().emptyCache();
@@ -38,6 +39,7 @@ class Backend {
     });
   }
 
+  // Gets the list of registered classes from cache or server
   static Future<List<Class>> getClasses() {
     return StaffCacheManager()
         .getSingleFile(baseURL + '/class/all')
@@ -53,6 +55,8 @@ class Backend {
     });
   }
 
+  /* Pulls the desired month's events (including users custom events) from the
+  server or cache */
   static Future<List<Event>> getMonthEvents(Months month,
       {int year = 0, bool force = false}) async {
     Map<String, String> headers = {};
@@ -86,6 +90,7 @@ class Backend {
     });
   }
 
+  // Gets the current user's data from the local cache or server (with user token)
   static Future<User> getUserData({bool force = false}) async {
     Map<String, String> headers = {};
     if (force) {
@@ -110,6 +115,7 @@ class Backend {
     });
   }
 
+  // Tells server to create a new account for the user
   static Future<User> registerAccount(String name) async {
     await UserCacheManager().emptyCache();
     return Auth.getToken().then((token) {
@@ -129,6 +135,7 @@ class Backend {
     });
   }
 
+  // Creates an event on the server for the user
   static Future<String> addEvent(Event event) async {
     await UserCacheManager().emptyCache();
     return Auth.getToken().then((token) {
@@ -146,6 +153,8 @@ class Backend {
     });
   }
 
+
+  // Pushes an updated version of the event to the server
   static Future<String> updateEvent(Event event) async {
     await UserCacheManager().emptyCache();
     return Auth.getToken().then((token) {
@@ -163,6 +172,7 @@ class Backend {
     });
   }
 
+  // Get the week's breakfast and lunch menu based on current week number
   static Future<WeekMenu> getWeekMenu(int week, {bool force = false}) async {
     if (force) {
       await MenuCacheManager().emptyCache();
@@ -183,6 +193,7 @@ class Backend {
     });
   }
 
+  // Send a bug report to the server
   static Future<String> reportBug(BugReportModel bugReportModel) {
     return Auth.getToken().then((token) {
       return Dio().post(
@@ -194,6 +205,7 @@ class Backend {
     });
   }
 
+  // Pulls the day's current feed from the server or cache
   static Future<Feed> getFeed() {
     return FeedCacheManager()
         .getSingleFile(baseURL + '/feed/')

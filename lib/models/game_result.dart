@@ -2,6 +2,7 @@ import 'package:pats4u/models/event_types.dart';
 import 'package:pats4u/models/team.dart';
 
 class GameResult {
+  // Create model variables
   Team home = Team();
   Team guest = Team();
   bool finalResult = true;
@@ -10,6 +11,7 @@ class GameResult {
 
   GameResult();
 
+  // Convert JSON to data model variables
   GameResult.fromJson(Map<String, dynamic> json) {
     home = Team.fromJson(json['home'] ?? []);
     guest = Team.fromJson(json['guest'] ?? []);

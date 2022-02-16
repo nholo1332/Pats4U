@@ -1,4 +1,5 @@
 class LunchMenuItem {
+  // Create model variables
   String day = '';
   String main = '';
   List<String> sides = [];
@@ -9,6 +10,7 @@ class LunchMenuItem {
 
   LunchMenuItem();
 
+  // Convert JSON to data model variables
   LunchMenuItem.fromJson(Map<String, dynamic> json) {
     day = json['day'] ?? '';
     main = json['main'] ?? '';

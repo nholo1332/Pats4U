@@ -50,6 +50,7 @@ class _SettingsState extends State<Settings> {
   }
 
   List<Widget> buildBody() {
+    // Add widgets to list of widgets to be returned to view
     List<Widget> items = [];
     if (Constants.userData.name != '') {
       items.add(

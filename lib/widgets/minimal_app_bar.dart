@@ -28,6 +28,7 @@ class MinimalAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Create a custom app bar from the passed variables
     return Container(
       color: Colors.transparent,
       child: Stack(

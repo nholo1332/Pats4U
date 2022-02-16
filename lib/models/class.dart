@@ -1,4 +1,5 @@
 class Class {
+  // Create model variables
   String id = '';
   String title = '';
   String teacher = '';
@@ -7,6 +8,7 @@ class Class {
 
   Class();
 
+  // Convert JSON to data model variables
   Class.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     title = json['title'] ?? '';

@@ -36,6 +36,8 @@ class ImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Create image container design
+    // Allow passing a custom cache provider (for different image types)
     Future<File>? imageProvider;
     if ( isNetwork ) {
       if ( imageCacheProvider == null ) {
@@ -44,6 +46,7 @@ class ImageContainer extends StatelessWidget {
         imageProvider = imageCacheProvider!;
       }
     }
+    // If image is network, load in FutureBuilder, and it not, load locally
     return Container(
       width: width,
       height: height,
@@ -98,6 +101,7 @@ class ImageContainer extends StatelessWidget {
     );
   }
 
+  // If not image found, display a blank container
   Widget blankImage() {
     return const Padding(
       padding: EdgeInsets.all(0),

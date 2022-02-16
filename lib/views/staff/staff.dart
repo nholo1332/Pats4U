@@ -66,6 +66,7 @@ class _Staff extends State<Staff> {
   }
 
   List<Widget> getStaff(List<StaffMember> staff) {
+    // Create list of staff items from staff data
     List<Widget> items = [];
     items.addAll(
       List.generate(

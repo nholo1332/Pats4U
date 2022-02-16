@@ -1,12 +1,14 @@
 import 'package:intl/intl.dart';
 
 class MenuHelpers {
+  // Calculate number of weeks in the year
   static int numOfWeeks(int year) {
     DateTime dec28 = DateTime(year, 12, 28);
     int dayOfDec28 = int.parse(DateFormat('D').format(dec28));
     return ((dayOfDec28 - dec28.weekday + 10) / 7).floor();
   }
 
+  // Calculates the current week number
   static int weekNumber(DateTime date) {
     int dayOfYear = int.parse(DateFormat('D').format(date));
     int woy = ((dayOfYear - date.weekday + 10) / 7).floor();

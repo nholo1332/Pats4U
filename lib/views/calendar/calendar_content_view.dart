@@ -35,6 +35,7 @@ class _CalendarContentView extends State<CalendarContentView> {
 
   @override
   Widget build(BuildContext context) {
+    // Rebuild data when the parent view (calendar view) send a newly selected date
     return StreamBuilder(
       stream: widget.dateStream,
       builder:
@@ -50,6 +51,7 @@ class _CalendarContentView extends State<CalendarContentView> {
   }
 
   getTodayEvents(DateTime date) {
+    // Filter events to only those of today
     final dateFormat = DateFormat('MM/dd/yyyy');
     dayEvents = monthEvents
         .where((event) =>
@@ -58,6 +60,7 @@ class _CalendarContentView extends State<CalendarContentView> {
   }
 
   Widget loadMonthEvents(DateTime newDate, bool forceUpdate) {
+    // Load month's events from server or cache
     final dateFormat = DateFormat('MM/yyyy');
     if (selectedMonthEvents != null &&
         dateFormat.format(newDate) ==
@@ -101,9 +104,11 @@ class _CalendarContentView extends State<CalendarContentView> {
   }
 
   Widget buildEvents() {
+    // Build the list of events
     DateFormat dateFormat = DateFormat('h:mm');
     DateFormat amPmDateFormat = DateFormat('a');
     List<Widget> widgets = [];
+    // Split all-day and time events below
     List<Event> allDayEvents =
         dayEvents.where((event) => event.allDay).toList();
     allDayEvents.sort((a, b) => a.title.compareTo(b.title));
@@ -279,6 +284,7 @@ class _CalendarContentView extends State<CalendarContentView> {
   }
 
   openEvent(Event event) {
+    // Navigate to the calendar detail view with selected event
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -289,6 +295,7 @@ class _CalendarContentView extends State<CalendarContentView> {
     );
   }
 
+  // Move to the edit event view with the event selected
   editEvent(Event event) {
     Navigator.push(
       context,
@@ -298,7 +305,8 @@ class _CalendarContentView extends State<CalendarContentView> {
         ),
       ),
     ).then((value) => {
-          if (value == true) {setState(() {})}
-        });
+      // Reload the current state after returning from edit (to show changes)
+      if (value == true) {setState(() {})}
+    });
   }
 }

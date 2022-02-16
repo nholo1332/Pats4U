@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pats4u/models/event_types.dart';
 
 class EventHelpers {
+  // Converts event type to the respective icon
   static IconData getIcon(EventTypes eventType) {
     switch (eventType) {
       case EventTypes.basketball:

@@ -1,4 +1,5 @@
 class BugReportModel {
+  // Create model variables
   String location = '';
   String description = '';
   String reproductionSteps = '';
@@ -6,6 +7,7 @@ class BugReportModel {
 
   BugReportModel();
 
+  // Convert JSON to data model variables
   BugReportModel.fromJson(Map<String, dynamic> json) {
     location = json['location'] ?? '';
     description = json['description'] ?? '';
@@ -13,6 +15,7 @@ class BugReportModel {
     deviceInfo = json['deviceInfo'] ?? '';
   }
 
+  // Convert data model variables to JSON
   Map<String, dynamic> toJSON() {
     return {
       'location': location,

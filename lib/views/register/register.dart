@@ -27,6 +27,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    // Create view structure and add widgets
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -234,6 +235,7 @@ class _RegisterState extends State<Register> {
   }
 
   register() {
+    // Handle creating user account
     if (name != '' && email != '' && password != '' && !loading) {
       setState(() {
         loading = true;

@@ -54,6 +54,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   List<Widget> buildBody() {
+    // Build the Patriot icon and FutureBuilder for Feed
     List<Widget> items = [];
     items.add(
       Center(
@@ -112,6 +113,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   List<Widget> buildContent(Feed feed) {
+    // Build the Feed item based on returned data
     List<Widget> items = [];
     if ( feed.announcements.isNotEmpty ) {
       items.add(
@@ -244,6 +246,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   Widget buildAnnouncement(Announcement announcement) {
+    // Build the announcement card
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -271,6 +274,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   Widget buildGameResult(GameResult gameResult) {
+    // Create the game result container (with mascots and scores)
     DateFormat dateFormat = DateFormat('MMM dd');
     return Container(
       decoration: BoxDecoration(
@@ -444,6 +448,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   Widget buildEventUpdate(EventUpdate eventUpdate) {
+    // Display list of Cards with event updates
     DateFormat dateFormat = DateFormat('MMM dd, yyyy');
     return Card(
       shape: RoundedRectangleBorder(
@@ -472,6 +477,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   openInfoDialog(String title, String content) {
+    // Display dialog with sent information
     return showDialog(
       context: context,
       builder: (BuildContext context) {

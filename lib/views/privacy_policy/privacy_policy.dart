@@ -37,6 +37,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   }
 
   List<Widget> buildBody() {
+    // Build privacy policy view structure
     List<Widget> items = [];
     items.add(
       Center(
@@ -54,6 +55,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         ),
       ),
     );
+    // Load privacy policy from markdown file and display after loading
     items.add(
       Expanded(
         child: FutureBuilder(

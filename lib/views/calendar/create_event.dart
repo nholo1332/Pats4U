@@ -68,6 +68,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   List<Widget> buildBody() {
+    // Add widgets to create the create event form
     List<Widget> items = [];
     items.add(
       Row(
@@ -367,6 +368,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   selectDate() async {
+    // Show date picker
     DateTime? date = await showDatePicker(
       context: context,
       firstDate: DateTime(DateTime.now().year, 1, 1),
@@ -381,6 +383,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   selectTime() async {
+    // Show time picker
     TimeOfDay? t = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(event.dateTime),
@@ -394,6 +397,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   addLink() {
+    // Open dialog to enter new link information
     EventLink eventLink = EventLink();
     showDialog<void>(
       context: context,
@@ -477,6 +481,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   saveEvent() {
+    // Create or save event to server (authenticated request)
     if (event.title != '' && event.id == '') {
       setState(() {
         saving = true;

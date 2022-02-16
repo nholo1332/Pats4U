@@ -7,6 +7,7 @@ class SizeConfig {
   static double blockSizeHorizontal = 0;
   static double blockSizeVertical = 0;
 
+  // Calculate responsive variables based on screen height and width
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;

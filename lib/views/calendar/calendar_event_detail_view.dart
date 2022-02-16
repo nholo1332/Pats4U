@@ -48,6 +48,7 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
   }
 
   Widget buildBody() {
+    // Build the event information section
     DateFormat dateFormat = DateFormat('EEEE, MMM d');
     DateFormat timeFormat = DateFormat('- h:mm a');
     List<Widget> items = [];
@@ -247,6 +248,9 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
   }
 
   twitterShare() {
+    // Share event to Twitter
+    /* NOTE: iOS has recently changed the manner of opening social media links,
+    and many Flutter systems have not been migrated */
     SocialShare.shareTwitter(
       'Join me at the ' + widget.event.title + ' event!',
       hashtags: [

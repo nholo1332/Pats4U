@@ -28,6 +28,7 @@ class _BugReportState extends State<BugReport> {
   @override
   void initState() {
     super.initState();
+    // Fetch current platform data
     if (Platform.isIOS) {
       deviceInfo.iosInfo.then((value) {
         setState(() {
@@ -45,6 +46,7 @@ class _BugReportState extends State<BugReport> {
 
   @override
   Widget build(BuildContext context) {
+    // Build the view body
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -220,6 +222,7 @@ class _BugReportState extends State<BugReport> {
   }
 
   report() {
+    // Check report form and send bug report
     if (bugReportModel.location != '' &&
         bugReportModel.description != '' &&
         bugReportModel.reproductionSteps != '' &&
@@ -272,6 +275,7 @@ class _BugReportState extends State<BugReport> {
   }
 
   String getDeviceInfoText() {
+    // Get device platform information in a compiled String format
     if (Platform.isIOS && iosInfo != null) {
       return 'iOS; ' +
           (iosInfo?.utsname.machine ?? '') +

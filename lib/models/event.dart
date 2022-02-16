@@ -2,6 +2,7 @@ import 'package:pats4u/models/event_link.dart';
 import 'package:pats4u/models/event_types.dart';
 
 class Event {
+  // Create model variables
   String id = '';
   String title = '';
   String description = '';
@@ -15,6 +16,7 @@ class Event {
 
   Event();
 
+  // Convert JSON to data model variables
   Event.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     title = json['name'] ?? '';
@@ -35,6 +37,7 @@ class Event {
     isUserEvent = json['isUserEvent'] ?? false;
   }
 
+  // Convert data model variables to JSON
   Map<String, dynamic> toJSON() {
     return {
       'name': title,

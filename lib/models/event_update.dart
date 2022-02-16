@@ -1,6 +1,7 @@
 import 'package:pats4u/models/event_types.dart';
 
 class EventUpdate {
+  // Create model variables
   String title = '';
   String content = '';
   EventTypes event = EventTypes.school;
@@ -8,6 +9,7 @@ class EventUpdate {
 
   EventUpdate();
 
+  // Convert JSON to data model variables
   EventUpdate.fromJson(Map<String, dynamic> json) {
     title = json['title'] ?? '';
     content = json['content'] ?? '';

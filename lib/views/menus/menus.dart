@@ -60,6 +60,7 @@ class _MenusState extends State<Menus> {
   }
 
   Widget buildBody(WeekMenu menuItems) {
+    // List all breakfast and lunch menu days
     List<Widget> items = [];
     if (menuItems.breakfast.isNotEmpty) {
       items.add(
@@ -161,6 +162,7 @@ class _MenusState extends State<Menus> {
   }
 
   Widget buildMenuItem(LunchMenuItem item, bool lunch) {
+    // Create a specific menu item with image and text
     DateFormat dateFormat = DateFormat('MM/dd/yyyy');
     double width = MediaQuery.of(context).size.width * .8;
     return GestureDetector(
@@ -319,6 +321,7 @@ class _MenusState extends State<Menus> {
   }
 
   Widget buildImage(LunchMenuItem item, double width) {
+    // Build an image container with image or shortened text of day name
     if (item.image != '') {
       return ImageContainer(
         image: item.image,

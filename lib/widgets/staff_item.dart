@@ -16,6 +16,7 @@ class StaffItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Create the staff list item
     return GestureDetector(
       onTap: onTap,
       child: Container(

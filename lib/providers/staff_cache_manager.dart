@@ -1,5 +1,6 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
+// Create an instance of the cache manager for the Staff data
 class StaffCacheManager extends CacheManager {
   static const key = 'staffCache';
   static const Duration cacheTimeout = Duration(days: 15);

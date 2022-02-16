@@ -6,16 +6,19 @@ import 'config/firebase_options.dart';
 import 'package:pats4u/themes/light_theme.dart';
 
 void main() async {
+  // Initialize Firebase (Auth)
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // Finally, run application
   runApp(const Pats4U());
 }
 
 class Pats4U extends StatelessWidget {
   const Pats4U({Key? key}) : super(key: key);
 
+  // Create MaterialApp wrapper
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

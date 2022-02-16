@@ -51,6 +51,7 @@ class _StaffDetailView extends State<StaffDetailView> {
   }
 
   List<Widget> buildBody() {
+    // Build staff info widgets
     List<Widget> items = [];
     items.add(
       Center(
@@ -333,6 +334,7 @@ class _StaffDetailView extends State<StaffDetailView> {
   }
 
   openInfoDialog(String title, String content) {
+    // Open dialog to display info
     return showDialog(
       context: context,
       builder: (BuildContext context) {

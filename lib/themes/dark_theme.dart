@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Define blue secondary color and palette
 const int bluePalettePrimary = 0xFF051064;
 const MaterialColor bluePalette = MaterialColor(bluePalettePrimary, <int, Color>{
   50: Color(0xFFE1E2EC),
@@ -14,6 +15,7 @@ const MaterialColor bluePalette = MaterialColor(bluePalettePrimary, <int, Color>
   900: Color(0xFF010536),
 });
 
+// Define red primary color and palette
 const int redPalettePrimary = 0xFFAC0000;
 const MaterialColor redPalette = MaterialColor(redPalettePrimary, <int, Color>{
   50: Color(0xFFF5E0E0),
@@ -28,6 +30,7 @@ const MaterialColor redPalette = MaterialColor(redPalettePrimary, <int, Color>{
   900: Color(0xFF820000),
 });
 
+// Setup the dark theme data with custom colors and font
 ThemeData darkTheme() {
   return ThemeData(
     fontFamily: 'Poppins',

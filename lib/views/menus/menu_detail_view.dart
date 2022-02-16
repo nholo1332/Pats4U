@@ -50,6 +50,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
   }
 
   Widget buildBody() {
+    // Display the lunch/breakfast details
     List<Widget> items = [];
     items.add(
       Row(
@@ -190,6 +191,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
         ),
       );
     }
+    // Create a Stack of widgets to allow for placing hierarchy
     return Stack(
       alignment: Alignment.topCenter,
       children: [
@@ -224,6 +226,7 @@ class _MenuDetailViewState extends State<MenuDetailView> {
   }
 
   Widget buildImage(LunchMenuItem item, double width) {
+    // Build an image container with image or shortened text of day name
     if (item.image != '') {
       return ImageContainer(
         image: item.image,

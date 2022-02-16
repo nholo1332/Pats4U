@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+// Add custom licenses to the built-in Flutter license view
 class AdditionalLicenses extends LicenseEntry {
   @override
   final List<String> packages;

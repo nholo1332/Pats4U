@@ -27,6 +27,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    // Build login view
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -216,6 +217,7 @@ class _LoginState extends State<Login> {
   }
 
   login() {
+    // Check form and sign user in. If successful, pull their data
     if (email != '' && password != '' && !loading) {
       setState(() {
         loading = true;
