@@ -30,8 +30,8 @@ class _Staff extends State<Staff> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
         future: Backend.getStaffMembers(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<StaffMember>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<StaffMember>> snapshot) {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.data != null) {
             return Padding(
@@ -78,7 +78,7 @@ class _Staff extends State<Staff> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                  StaffDetailView(staffMember: staff[index]),
+                    StaffDetailView(staffMember: staff[index]),
               ),
             );
           },

@@ -363,9 +363,9 @@ class _SettingsState extends State<Settings> {
             Expanded(
               child: Text(
                 'The application cache allows data to be stored locally on the '
-                    'device to make loading faster and data fetching while offline possible. '
-                    'If you need to refresh the cache, clear the respective caches below. '
-                    'If data errors are encountered, try clearing the respective cache below.',
+                'device to make loading faster and data fetching while offline possible. '
+                'If you need to refresh the cache, clear the respective caches below. '
+                'If data errors are encountered, try clearing the respective cache below.',
                 maxLines: 10,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

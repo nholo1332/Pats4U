@@ -98,14 +98,15 @@ class _StaffDetailView extends State<StaffDetailView> {
                           return Chip(
                             label: Text(
                               ((snapshot.data ?? []).firstWhere(
-                                      (c) =>
-                                  c.id == widget.staffMember.classes[index],
+                                  (c) =>
+                                      c.id == widget.staffMember.classes[index],
                                   orElse: () => Class())).title,
                               style: TextStyle(
-                                  color: Theme.of(context).colorScheme.onPrimary),
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary),
                             ),
                             backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
+                                Theme.of(context).colorScheme.secondary,
                           );
                         },
                       ),

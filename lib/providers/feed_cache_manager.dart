@@ -7,11 +7,11 @@ class FeedCacheManager extends CacheManager {
 
   FeedCacheManager()
       : super(
-    Config(
-      key,
-      stalePeriod: cacheTimeout,
-      maxNrOfCacheObjects: 8,
-      fileService: HttpFileService(),
-    ),
-  );
+          Config(
+            key,
+            stalePeriod: cacheTimeout,
+            maxNrOfCacheObjects: 8,
+            fileService: HttpFileService(),
+          ),
+        );
 }

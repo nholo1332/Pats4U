@@ -7,10 +7,10 @@ class MenuImageCacheManager extends CacheManager {
 
   MenuImageCacheManager()
       : super(
-    Config(
-      key,
-      stalePeriod: cacheTimeout,
-      maxNrOfCacheObjects: 100,
-    ),
-  );
+          Config(
+            key,
+            stalePeriod: cacheTimeout,
+            maxNrOfCacheObjects: 100,
+          ),
+        );
 }

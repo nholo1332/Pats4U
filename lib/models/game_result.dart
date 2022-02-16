@@ -18,7 +18,7 @@ class GameResult {
     finalResult = json['finalResult'] ?? true;
     sport = json['sport'] != null
         ? EventTypes.values.firstWhere((m) => m.name == json['sport'],
-        orElse: () => EventTypes.school)
+            orElse: () => EventTypes.school)
         : EventTypes.school;
     date = json['date'] != null
         ? DateTime.parse(json['date']).toLocal()

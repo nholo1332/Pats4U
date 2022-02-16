@@ -39,8 +39,8 @@ class ImageContainer extends StatelessWidget {
     // Create image container design
     // Allow passing a custom cache provider (for different image types)
     Future<File>? imageProvider;
-    if ( isNetwork ) {
-      if ( imageCacheProvider == null ) {
+    if (isNetwork) {
+      if (imageCacheProvider == null) {
         imageProvider = StaffImageCacheManager().getSingleFile(image);
       } else {
         imageProvider = imageCacheProvider!;

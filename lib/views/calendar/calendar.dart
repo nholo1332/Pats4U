@@ -124,7 +124,7 @@ class _CalendarState extends State<Calendar> {
                       builder: (context) => const Login(),
                     ),
                   ).then((value) {
-                    if ( value == true ) {
+                    if (value == true) {
                       dateStreamController.add(
                         CalendarStreamEvent.create(
                           DateTime.now(),

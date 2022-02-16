@@ -76,8 +76,7 @@ class _HomeFeedState extends State<HomeFeed> {
     items.add(
       FutureBuilder(
         future: Backend.getFeed(),
-        builder: (BuildContext context,
-            AsyncSnapshot<Feed> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Feed> snapshot) {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.data != null) {
             return Padding(
@@ -115,7 +114,7 @@ class _HomeFeedState extends State<HomeFeed> {
   List<Widget> buildContent(Feed feed) {
     // Build the Feed item based on returned data
     List<Widget> items = [];
-    if ( feed.announcements.isNotEmpty ) {
+    if (feed.announcements.isNotEmpty) {
       items.add(
         Row(
           children: [
@@ -146,19 +145,20 @@ class _HomeFeedState extends State<HomeFeed> {
           ),
           items: List.generate(
             feed.announcements.length,
-                (index) => buildAnnouncement(feed.announcements[index]),
+            (index) => buildAnnouncement(feed.announcements[index]),
           ),
         ),
       );
     }
-    if ( feed.announcements.isNotEmpty && ( feed.gameResults.isNotEmpty || feed.eventUpdates.isNotEmpty ) ) {
+    if (feed.announcements.isNotEmpty &&
+        (feed.gameResults.isNotEmpty || feed.eventUpdates.isNotEmpty)) {
       items.add(
         const SizedBox(
           height: 25,
         ),
       );
     }
-    if ( feed.gameResults.isNotEmpty ) {
+    if (feed.gameResults.isNotEmpty) {
       items.add(
         Row(
           children: [
@@ -189,19 +189,20 @@ class _HomeFeedState extends State<HomeFeed> {
           ),
           items: List.generate(
             feed.gameResults.length,
-                (index) => buildGameResult(feed.gameResults[index]),
+            (index) => buildGameResult(feed.gameResults[index]),
           ),
         ),
       );
     }
-    if ( feed.eventUpdates.isNotEmpty && ( feed.gameResults.isNotEmpty || feed.announcements.isNotEmpty ) ) {
+    if (feed.eventUpdates.isNotEmpty &&
+        (feed.gameResults.isNotEmpty || feed.announcements.isNotEmpty)) {
       items.add(
         const SizedBox(
           height: 25,
         ),
       );
     }
-    if ( feed.eventUpdates.isNotEmpty ) {
+    if (feed.eventUpdates.isNotEmpty) {
       items.add(
         Row(
           children: [
@@ -232,7 +233,7 @@ class _HomeFeedState extends State<HomeFeed> {
           ),
           items: List.generate(
             feed.eventUpdates.length,
-                (index) => buildEventUpdate(feed.eventUpdates[index]),
+            (index) => buildEventUpdate(feed.eventUpdates[index]),
           ),
         ),
       );
@@ -323,9 +324,11 @@ class _HomeFeedState extends State<HomeFeed> {
                   children: [
                     Center(
                       child: FutureBuilder(
-                        future: MascotImageCacheManager().getSingleFile(gameResult.home.mascot),
+                        future: MascotImageCacheManager()
+                            .getSingleFile(gameResult.home.mascot),
                         builder: (context, AsyncSnapshot<File> snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done &&
+                          if (snapshot.connectionState ==
+                                  ConnectionState.done &&
                               snapshot.data != null) {
                             return Container(
                               padding: const EdgeInsets.only(
@@ -367,7 +370,9 @@ class _HomeFeedState extends State<HomeFeed> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      gameResult.home.score.toString() + ' - ' + gameResult.guest.score.toString(),
+                      gameResult.home.score.toString() +
+                          ' - ' +
+                          gameResult.guest.score.toString(),
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 22,
@@ -384,7 +389,7 @@ class _HomeFeedState extends State<HomeFeed> {
                           left: 15,
                           right: 15,
                         ),
-                        child:  Text(
+                        child: Text(
                           gameResult.finalResult ? 'Final' : 'Active',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onPrimary,
@@ -401,9 +406,11 @@ class _HomeFeedState extends State<HomeFeed> {
                   children: [
                     Center(
                       child: FutureBuilder(
-                        future: MascotImageCacheManager().getSingleFile(gameResult.guest.mascot),
+                        future: MascotImageCacheManager()
+                            .getSingleFile(gameResult.guest.mascot),
                         builder: (context, AsyncSnapshot<File> snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done &&
+                          if (snapshot.connectionState ==
+                                  ConnectionState.done &&
                               snapshot.data != null) {
                             return Container(
                               padding: const EdgeInsets.only(
@@ -470,7 +477,11 @@ class _HomeFeedState extends State<HomeFeed> {
           overflow: TextOverflow.ellipsis,
         ),
         onTap: () {
-          openInfoDialog(eventUpdate.title, eventUpdate.content + '\n\n' + dateFormat.format(eventUpdate.date));
+          openInfoDialog(
+              eventUpdate.title,
+              eventUpdate.content +
+                  '\n\n' +
+                  dateFormat.format(eventUpdate.date));
         },
       ),
     );

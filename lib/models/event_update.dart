@@ -15,7 +15,7 @@ class EventUpdate {
     content = json['content'] ?? '';
     event = json['event'] != null
         ? EventTypes.values.firstWhere((m) => m.name == json['event'],
-        orElse: () => EventTypes.school)
+            orElse: () => EventTypes.school)
         : EventTypes.school;
     date = json['date'] != null
         ? DateTime.parse(json['date']).toLocal()

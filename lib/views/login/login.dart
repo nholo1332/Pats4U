@@ -73,7 +73,10 @@ class _LoginState extends State<Login> {
                         height: 20,
                       ),
                       Image.asset(
-                        MediaQuery.of(context).platformBrightness == Brightness.light ? 'assets/images/account_line.png' : 'assets/images/account_line_darkmode.png',
+                        MediaQuery.of(context).platformBrightness ==
+                                Brightness.light
+                            ? 'assets/images/account_line.png'
+                            : 'assets/images/account_line_darkmode.png',
                         width: 99,
                         height: 4,
                       ),

@@ -305,8 +305,8 @@ class _CalendarContentView extends State<CalendarContentView> {
         ),
       ),
     ).then((value) => {
-      // Reload the current state after returning from edit (to show changes)
-      if (value == true) {setState(() {})}
-    });
+          // Reload the current state after returning from edit (to show changes)
+          if (value == true) {setState(() {})}
+        });
   }
 }

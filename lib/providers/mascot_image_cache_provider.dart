@@ -7,10 +7,10 @@ class MascotImageCacheManager extends CacheManager {
 
   MascotImageCacheManager()
       : super(
-    Config(
-      key,
-      stalePeriod: cacheTimeout,
-      maxNrOfCacheObjects: 40,
-    ),
-  );
+          Config(
+            key,
+            stalePeriod: cacheTimeout,
+            maxNrOfCacheObjects: 40,
+          ),
+        );
 }

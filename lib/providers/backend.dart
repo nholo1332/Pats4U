@@ -153,7 +153,6 @@ class Backend {
     });
   }
 
-
   // Pushes an updated version of the event to the server
   static Future<String> updateEvent(Event event) async {
     await UserCacheManager().emptyCache();
