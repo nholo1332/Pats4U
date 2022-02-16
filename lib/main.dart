@@ -23,6 +23,7 @@ class Pats4U extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
