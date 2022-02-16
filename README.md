@@ -77,6 +77,14 @@ Make sure you have a supported device connected that is trusted on your computer
 # Build for iOS
 $ flutter build --ios
 ```
+If you receive an error related to CocoaPods, please try the following commands:
+```
+# Go into the repository
+$ cd ios
+
+# Install dependencies
+$ pod install
+```
 Then, open Xcode and navigate to the project to open the `Runner.xcworkspace`. From there, select your target device and click run.
 
 
