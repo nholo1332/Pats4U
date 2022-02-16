@@ -88,23 +88,26 @@ class _StaffDetailView extends State<StaffDetailView> {
               builder: (context, AsyncSnapshot<List<Class>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.data != null) {
-                  return Row(
-                    children: List.generate(
-                      widget.staffMember.classes.length,
-                      (index) {
-                        return Chip(
-                          label: Text(
-                            ((snapshot.data ?? []).firstWhere(
-                                (c) =>
-                                    c.id == widget.staffMember.classes[index],
-                                orElse: () => Class())).title,
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary),
-                          ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                        );
-                      },
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                        widget.staffMember.classes.length,
+                        (index) {
+                          return Chip(
+                            label: Text(
+                              ((snapshot.data ?? []).firstWhere(
+                                      (c) =>
+                                  c.id == widget.staffMember.classes[index],
+                                  orElse: () => Class())).title,
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.onPrimary),
+                            ),
+                            backgroundColor:
+                            Theme.of(context).colorScheme.secondary,
+                          );
+                        },
+                      ),
                     ),
                   );
                 } else {
