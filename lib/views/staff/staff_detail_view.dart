@@ -251,11 +251,12 @@ class _StaffDetailView extends State<StaffDetailView> {
                       children: [
                         Expanded(
                           child: ListTile(
-                            leading: Icon(
-                              widget.staffMember.hobbies[index].icon != 0
+                            leading: const Icon(
+                                Icons.star,
+                              /*widget.staffMember.hobbies[index].icon != 0
                                   ? IconData(
                                       widget.staffMember.hobbies[index].icon)
-                                  : Icons.star,
+                                  : Icons.star,*/
                             ),
                             title: Text(
                               widget.staffMember.hobbies[index].title,
