@@ -3,6 +3,8 @@ import 'package:pats4u/providers/auth.dart';
 import 'package:pats4u/providers/classes_cache_manager.dart';
 import 'package:pats4u/providers/constants.dart';
 import 'package:pats4u/providers/events_cache_manager.dart';
+import 'package:pats4u/providers/feed_cache_manager.dart';
+import 'package:pats4u/providers/mascot_image_cache_provider.dart';
 import 'package:pats4u/providers/menu_cache_manager.dart';
 import 'package:pats4u/providers/menu_image_cache_manager.dart';
 import 'package:pats4u/providers/size_config.dart';
@@ -482,6 +484,48 @@ class _SettingsState extends State<Settings> {
                 );
                 await MenuCacheManager().emptyCache();
                 await MenuImageCacheManager().emptyCache();
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Cache Cleared'),
+                    duration: const Duration(
+                      seconds: 3,
+                    ),
+                    action: SnackBarAction(
+                      label: 'Ok',
+                      onPressed: () {},
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
+    items.add(
+      Padding(
+        padding: const EdgeInsets.only(
+          left: 25,
+          right: 25,
+        ),
+        child: Row(
+          children: [
+            OutlinedButton(
+              child: Text(
+                'Feed Cache',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              onPressed: () async {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Clearing cache...'),
+                  ),
+                );
+                await FeedCacheManager().emptyCache();
+                await MascotImageCacheManager().emptyCache();
                 ScaffoldMessenger.of(context).clearSnackBars();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
