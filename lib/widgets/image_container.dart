@@ -66,7 +66,6 @@ class ImageContainer extends StatelessWidget {
               builder: (context, AsyncSnapshot<File> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.data != null) {
-                  //imageFilePath = snapshot.data!.path;
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius:
