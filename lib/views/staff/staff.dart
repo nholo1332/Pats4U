@@ -23,44 +23,46 @@ class _Staff extends State<Staff> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const MinimalAppBar(
-          title: 'Staff',
-          height: 65,
-        ),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: FutureBuilder(
-          future: Backend.getStaffMembers(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<StaffMember>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done &&
-                snapshot.data != null) {
-              return Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: getStaff(snapshot.data!),
-                    ),
-                  ));
-            } else {
-              return const Center(
-                child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Center(
-                    child: SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: CircularProgressIndicator(),
-                    ),
+      appBar: const MinimalAppBar(
+        title: 'Staff',
+        height: 65,
+      ),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: FutureBuilder(
+        future: Backend.getStaffMembers(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<StaffMember>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data != null) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: getStaff(snapshot.data!),
+                ),
+              ),
+            );
+          } else {
+            return const Center(
+              child: SizedBox(
+                height: 100,
+                width: 100,
+                child: Center(
+                  child: SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: CircularProgressIndicator(),
                   ),
                 ),
-              );
-            }
-          },
-        ));
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 
   List<Widget> getStaff(List<StaffMember> staff) {
@@ -75,7 +77,7 @@ class _Staff extends State<Staff> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    StaffDetailView(staffMember: staff[index]),
+                  StaffDetailView(staffMember: staff[index]),
               ),
             );
           },
