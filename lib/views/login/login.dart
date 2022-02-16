@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                         height: 20,
                       ),
                       Image.asset(
-                        'assets/images/account_line.png',
+                        MediaQuery.of(context).platformBrightness == Brightness.light ? 'assets/images/account_line.png' : 'assets/images/account_line_darkmode.png',
                         width: 99,
                         height: 4,
                       ),
@@ -225,7 +225,7 @@ class _LoginState extends State<Login> {
         return Backend.getUserData(force: true);
       }).then((value) {
         Constants.userData = value;
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
       }).catchError((error) {
         setState(() {
           loading = false;

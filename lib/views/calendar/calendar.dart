@@ -118,7 +118,16 @@ class _CalendarState extends State<Calendar> {
                     MaterialPageRoute(
                       builder: (context) => const Login(),
                     ),
-                  );
+                  ).then((value) {
+                    if ( value == true ) {
+                      dateStreamController.add(
+                        CalendarStreamEvent.create(
+                          DateTime.now(),
+                          force: true,
+                        ),
+                      );
+                    }
+                  });
                 },
               ),
             ],
