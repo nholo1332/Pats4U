@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Because Firebase auth will immediately return the auth state, we must
     // wait for the view to load to prevent moving to another view
     // before the current is loaded
-    WidgetsBinding.instance?.addPostFrameCallback((_) => fetchData());
+    WidgetsBinding.instance.addPostFrameCallback((_) => fetchData());
   }
 
   @override

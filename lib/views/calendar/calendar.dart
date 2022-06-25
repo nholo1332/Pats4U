@@ -22,12 +22,14 @@ class _CalendarState extends State<Calendar> {
   StreamController<CalendarStreamEvent> dateStreamController =
       StreamController<CalendarStreamEvent>();
 
+  DateTime lastDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();
     /* Send current selected date to ensure the calendar content view displays
     the correct date. Not doing so could prevent proper hot reloading */
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       dateStreamController.add(CalendarStreamEvent.create(DateTime.now()));
     });
   }
@@ -49,7 +51,7 @@ class _CalendarState extends State<Calendar> {
       body: Column(
         children: [
           CalendarTimeline(
-            initialDate: DateTime.now(),
+            initialDate: lastDate,
             firstDate: DateTime(DateTime.now().year, 1, 1),
             lastDate: DateTime(DateTime.now().year, 12, 31),
             dayColor: Theme.of(context).colorScheme.primary,
@@ -61,6 +63,7 @@ class _CalendarState extends State<Calendar> {
             locale: 'en_ISO',
             onDateSelected: (date) {
               if (date != null) {
+                lastDate = date;
                 dateStreamController.add(CalendarStreamEvent.create(date));
               }
             },
@@ -153,7 +156,7 @@ class _CalendarState extends State<Calendar> {
           onTap: () {
             dateStreamController.add(
               CalendarStreamEvent.create(
-                DateTime.now(),
+                lastDate,
                 force: true,
               ),
             );
