@@ -94,6 +94,25 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
         ],
       ),
     );
+    if (widget.event.description != '') {
+      items.add(
+        const SizedBox(
+          height: 25,
+        ),
+      );
+      items.add(
+        Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                leading: const Icon(Icons.short_text),
+                title: Text(widget.event.description),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
     if (widget.event.location != '' || widget.event.mapsLink != '') {
       items.add(
         const SizedBox(
