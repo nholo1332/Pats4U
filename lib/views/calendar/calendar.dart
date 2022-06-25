@@ -57,6 +57,7 @@ class _CalendarState extends State<Calendar> {
             dayColor: Theme.of(context).colorScheme.primary,
             activeDayColor: Theme.of(context).colorScheme.onSecondary,
             activeBackgroundDayColor: Theme.of(context).colorScheme.secondary,
+            monthColor: Theme.of(context).colorScheme.onBackground,
             dotsColor:
                 Theme.of(context).colorScheme.onSecondary.withOpacity(0.9),
             leftMargin: 40,
