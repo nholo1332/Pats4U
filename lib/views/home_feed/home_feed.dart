@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
 import 'package:intl/intl.dart';
 import 'package:pats4u/models/announcement.dart';
+import 'package:pats4u/models/event.dart';
 import 'package:pats4u/models/event_update.dart';
 import 'package:pats4u/models/feed.dart';
 import 'package:pats4u/models/game_result.dart';
@@ -10,6 +11,7 @@ import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/event_helpers.dart';
 import 'package:pats4u/providers/mascot_image_cache_provider.dart';
 import 'package:pats4u/providers/size_config.dart';
+import 'package:pats4u/views/announcements/announcements.dart';
 import 'package:pats4u/views/settings/settings.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
 
@@ -40,6 +42,15 @@ class _HomeFeedState extends State<HomeFeed> {
             context,
             MaterialPageRoute(
               builder: (context) => const Settings(),
+            ),
+          );
+        },
+        rightIcon: Icons.campaign,
+        rightAction: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Announcements(),
             ),
           );
         },
@@ -113,6 +124,15 @@ class _HomeFeedState extends State<HomeFeed> {
 
   List<Widget> buildContent(Feed feed) {
     // Build the Feed item based on returned data
+    var content = [];
+    content.addAll(feed.eventUpdates);
+    content.addAll(feed.gameResults);
+    content.sort((a, b) {
+      if ( (a is EventUpdate || a is GameResult) && (b is EventUpdate || b is GameResult) ) {
+        return b.date.compareTo(a.date);
+      }
+      return 0;
+    });
     List<Widget> items = [];
     if (feed.announcements.isNotEmpty) {
       items.add(
@@ -303,9 +323,25 @@ class _HomeFeedState extends State<HomeFeed> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                EventHelpers.getIcon(gameResult.sport),
-                size: 25,
+              Expanded(
+                child: (gameResult.finalResult && gameResult.home.score > gameResult.guest.score) ? const Icon(
+                  Icons.workspace_premium,
+                  color: Colors.amberAccent,
+                  size: 25,
+                ) : Container(),
+              ),
+              Expanded(
+                child: Icon(
+                  EventHelpers.getIcon(gameResult.sport),
+                  size: 25,
+                ),
+              ),
+              Expanded(
+                child: (gameResult.finalResult && gameResult.home.score < gameResult.guest.score) ? const Icon(
+                  Icons.workspace_premium,
+                  color: Colors.amberAccent,
+                  size: 25,
+                ) : Container(),
               ),
             ],
           ),
