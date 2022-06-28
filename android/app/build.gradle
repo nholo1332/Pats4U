@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "com.clfbla.pats4u"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 17
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
