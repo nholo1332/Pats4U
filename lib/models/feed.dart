@@ -1,12 +1,16 @@
 import 'package:pats4u/models/announcement.dart';
 import 'package:pats4u/models/event_update.dart';
+import 'package:pats4u/models/face_book_post.dart';
 import 'package:pats4u/models/game_result.dart';
+import 'package:pats4u/models/you_tube_video.dart';
 
 class Feed {
   // Create model variables
   List<GameResult> gameResults = [];
   List<EventUpdate> eventUpdates = [];
   List<Announcement> announcements = [];
+  List<YouTubeVideo> youTubeVideo = [];
+  List<FaceBookPost> faceBookPosts = [];
 
   Feed();
 
@@ -20,6 +24,12 @@ class Feed {
         .toList();
     announcements = ((json['announcements'] ?? []) as List)
         .map((m) => Announcement.fromJson(m))
+        .toList();
+    youTubeVideo = ((json['youtube'] ?? []) as List)
+        .map((m) => YouTubeVideo.fromJson(m))
+        .toList();
+    faceBookPosts = ((json['facebook'] ?? []) as List)
+        .map((m) => FaceBookPost.fromJson(m))
         .toList();
   }
 }

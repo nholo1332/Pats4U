@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Define blue primary color and palette
 const int bluePalettePrimary = 0xFF051064;
@@ -48,6 +49,9 @@ ThemeData lightTheme() {
       onBackground: Colors.black87,
       surface: Colors.white,
       onSurface: Colors.black87,
+    ),
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
   );
 }

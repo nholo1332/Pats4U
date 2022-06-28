@@ -5,8 +5,8 @@ import 'package:pats4u/providers/event_helpers.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/widgets/image_container.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
-import 'package:social_share/social_share.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_share_me/flutter_share_me.dart';
 
 class CalendarEventDetailView extends StatefulWidget {
   final Event event;
@@ -94,6 +94,25 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
         ],
       ),
     );
+    if (widget.event.description != '') {
+      items.add(
+        const SizedBox(
+          height: 25,
+        ),
+      );
+      items.add(
+        Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                leading: const Icon(Icons.short_text),
+                title: Text(widget.event.description),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
     if (widget.event.location != '' || widget.event.mapsLink != '') {
       items.add(
         const SizedBox(
@@ -249,16 +268,10 @@ class _CalendarEventDetailViewState extends State<CalendarEventDetailView> {
 
   twitterShare() {
     // Share event to Twitter
-    /* NOTE: iOS has recently changed the manner of opening social media links,
-    and many Flutter systems have not been migrated */
-    SocialShare.shareTwitter(
-      'Join me at the ' + widget.event.title + ' event!',
-      hashtags: [
-        'clpatriots',
-        widget.event.eventType.name,
-        widget.event.location.replaceAll(' ', ''),
-      ],
-      url: widget.event.mapsLink != '' ? widget.event.mapsLink : null,
+    FlutterShareMe flutterShareMe = FlutterShareMe();
+    flutterShareMe.shareToTwitter(
+      msg: 'Join me at the ' + widget.event.title + ' event on ' + DateFormat('MM-dd – kk:mm').format(widget.event.dateTime) + '!',
+      url: widget.event.mapsLink != '' ? widget.event.mapsLink : 'https://clfbla.org',
     ).catchError((_) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

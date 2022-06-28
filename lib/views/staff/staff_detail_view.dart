@@ -95,18 +95,21 @@ class _StaffDetailView extends State<StaffDetailView> {
                       children: List.generate(
                         widget.staffMember.classes.length,
                         (index) {
-                          return Chip(
-                            label: Text(
-                              ((snapshot.data ?? []).firstWhere(
-                                  (c) =>
-                                      c.id == widget.staffMember.classes[index],
-                                  orElse: () => Class())).title,
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary),
+                          return Container(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Chip(
+                              label: Text(
+                                ((snapshot.data ?? []).firstWhere(
+                                        (c) =>
+                                    c.id == widget.staffMember.classes[index],
+                                    orElse: () => Class())).title,
+                                style: TextStyle(
+                                    color:
+                                    Theme.of(context).colorScheme.onPrimary),
+                              ),
+                              backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                             ),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
                           );
                         },
                       ),
