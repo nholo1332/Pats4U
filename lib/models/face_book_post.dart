@@ -1,4 +1,4 @@
-import 'package:pats4u/models/faceBookPicture.dart';
+import 'package:pats4u/models/face_book_picture.dart';
 
 class FaceBookPost {
   // Create model variables

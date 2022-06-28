@@ -1,6 +1,6 @@
 import 'package:pats4u/models/announcement.dart';
 import 'package:pats4u/models/event_update.dart';
-import 'package:pats4u/models/faceBookPost.dart';
+import 'package:pats4u/models/face_book_post.dart';
 import 'package:pats4u/models/game_result.dart';
 import 'package:pats4u/models/youTubeVideo.dart';
 
