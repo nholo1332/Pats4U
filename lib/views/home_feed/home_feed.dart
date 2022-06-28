@@ -5,15 +5,19 @@ import 'package:intl/intl.dart';
 import 'package:pats4u/models/announcement.dart';
 import 'package:pats4u/models/event.dart';
 import 'package:pats4u/models/event_update.dart';
+import 'package:pats4u/models/face_book_post.dart';
 import 'package:pats4u/models/feed.dart';
 import 'package:pats4u/models/game_result.dart';
+import 'package:pats4u/models/youTubeVideo.dart';
 import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/event_helpers.dart';
+import 'package:pats4u/providers/feed_image_cache_provider.dart';
 import 'package:pats4u/providers/mascot_image_cache_provider.dart';
 import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/announcements/announcements.dart';
 import 'package:pats4u/views/settings/settings.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({Key? key}) : super(key: key);
@@ -127,169 +131,181 @@ class _HomeFeedState extends State<HomeFeed> {
     var content = [];
     content.addAll(feed.eventUpdates);
     content.addAll(feed.gameResults);
+    content.addAll(feed.youTubeVideo);
+    content.addAll(feed.faceBookPosts);
     content.sort((a, b) {
-      if ( (a is EventUpdate || a is GameResult) && (b is EventUpdate || b is GameResult) ) {
+      if ( (a is EventUpdate || a is GameResult || a is YouTubeVideo || a is FaceBookPost) && (b is EventUpdate || b is GameResult || b is YouTubeVideo || b is FaceBookPost) ) {
         return b.date.compareTo(a.date);
       }
       return 0;
     });
     List<Widget> items = [];
-    if (feed.announcements.isNotEmpty) {
-      items.add(
-        Row(
-          children: [
-            Text(
-              'Announcements',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.blockSizeVertical * 2.2,
-                color: Theme.of(context).colorScheme.onBackground,
+    items.addAll(
+      List.generate(
+        content.length,
+        (index) {
+          var feedItem = content[index];
+          Widget header = Container();
+          Widget body = Container();
+
+          if (feedItem is EventUpdate) {
+            header = ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-            ),
-          ],
-        ),
-      );
-      items.add(
-        const SizedBox(
-          height: 15,
-        ),
-      );
-      items.add(
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 115,
-            enlargeCenterPage: true,
-            disableCenter: true,
-            viewportFraction: .8,
-            enableInfiniteScroll: false,
-          ),
-          items: List.generate(
-            feed.announcements.length,
-            (index) => buildAnnouncement(feed.announcements[index]),
-          ),
-        ),
-      );
-    }
-    if (feed.announcements.isNotEmpty &&
-        (feed.gameResults.isNotEmpty || feed.eventUpdates.isNotEmpty)) {
-      items.add(
-        const SizedBox(
-          height: 25,
-        ),
-      );
-    }
-    if (feed.gameResults.isNotEmpty) {
-      items.add(
-        Row(
-          children: [
-            Text(
-              'Game Results',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.blockSizeVertical * 2.2,
-                color: Theme.of(context).colorScheme.onBackground,
+              leading: const Icon(Icons.info),
+              title: const Text(
+                'Event Update',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
-        ),
-      );
-      items.add(
-        const SizedBox(
-          height: 15,
-        ),
-      );
-      items.add(
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 185,
-            enlargeCenterPage: true,
-            disableCenter: true,
-            viewportFraction: .8,
-            enableInfiniteScroll: false,
-          ),
-          items: List.generate(
-            feed.gameResults.length,
-            (index) => buildGameResult(feed.gameResults[index]),
-          ),
-        ),
-      );
-    }
-    if (feed.eventUpdates.isNotEmpty &&
-        (feed.gameResults.isNotEmpty || feed.announcements.isNotEmpty)) {
-      items.add(
-        const SizedBox(
-          height: 25,
-        ),
-      );
-    }
-    if (feed.eventUpdates.isNotEmpty) {
-      items.add(
-        Row(
-          children: [
-            Text(
-              'Event Updates',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.blockSizeVertical * 2.2,
-                color: Theme.of(context).colorScheme.onBackground,
+              subtitle: Text(
+                DateFormat('MMM dd, yyyy').format(feedItem.date),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
+            );
+            body = buildEventUpdate(feedItem);
+          } else if (feedItem is GameResult) {
+            header = ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              leading: const Icon(Icons.score),
+              title: const Text(
+                'Game Update',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            );
+            body = buildGameResult(feedItem);
+          } else if (feedItem is YouTubeVideo) {
+            header = ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              leading: const Icon(Icons.video_collection),
+              title: const Text(
+                'YouTube Video',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                DateFormat('MMM dd, yyyy').format(feedItem.date),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            );
+            body = buildYouTubeVideo(feedItem);
+          } else if (feedItem is FaceBookPost) {
+            header = ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              leading: const Icon(Icons.facebook),
+              title: const Text(
+                'Facebook Post',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                DateFormat('MMM dd, yyyy').format(feedItem.date),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            );
+            body = buildFacebookPost(feedItem);
+          }
+
+          return Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
             ),
-          ],
-        ),
-      );
-      items.add(
-        const SizedBox(
-          height: 15,
-        ),
-      );
-      items.add(
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 115,
-            enlargeCenterPage: true,
-            disableCenter: true,
-            viewportFraction: .8,
-            enableInfiniteScroll: false,
-          ),
-          items: List.generate(
-            feed.eventUpdates.length,
-            (index) => buildEventUpdate(feed.eventUpdates[index]),
-          ),
-        ),
-      );
-    }
+            child: Column(
+              children: [
+                header,
+                body,
+              ],
+            ),
+          );
+        },
+      ),
+    );
     items.add(
       const SizedBox(
-        height: 125,
+        height: 100,
       ),
     );
     return items;
   }
 
-  Widget buildAnnouncement(Announcement announcement) {
-    // Build the announcement card
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+  Widget buildYouTubeVideo(YouTubeVideo youTubeVideo) {
+    YoutubePlayerController _controller = YoutubePlayerController(
+      initialVideoId: youTubeVideo.id,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
       ),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+    );
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: _controller,
+      ),
+      builder: (context, player) {
+        return ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+          ),
+          child: player,
+        );
+      }
+    );
+  }
+
+  Widget buildFacebookPost(FaceBookPost faceBookPost) {
+    List<Widget> items = [];
+    if (faceBookPost.text != '') {
+      items.add(Text(faceBookPost.text));
+    }
+    if (faceBookPost.pictures.isNotEmpty) {
+      items.add(
+        Container(
+          padding: const EdgeInsets.only(top: 15),
+          child: FutureBuilder(
+            future: FeedImageCacheManager()
+                .getSingleFile(faceBookPost.pictures[0].url),
+            builder: (context, AsyncSnapshot<File> snapshot) {
+              if (snapshot.connectionState ==
+                  ConnectionState.done &&
+                  snapshot.data != null) {
+                return Image(image: FileImage(snapshot.data!));
+              } else {
+                return const SizedBox(
+                  height: 65,
+                  width: 65,
+                  child: Center(
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
         ),
-        leading: const Icon(Icons.info),
-        title: Text(
-          announcement.title,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          announcement.content,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        onTap: () {
-          openInfoDialog(announcement.title, announcement.content);
-        },
+      );
+    }
+    return Container(
+      padding: const EdgeInsets.only(
+        left: 20,
+        right: 20,
+        bottom: 20,
+      ),
+      child: Column(
+        children: items,
       ),
     );
   }
@@ -297,229 +313,216 @@ class _HomeFeedState extends State<HomeFeed> {
   Widget buildGameResult(GameResult gameResult) {
     // Create the game result container (with mascots and scores)
     DateFormat dateFormat = DateFormat('MMM dd');
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).colorScheme.shadow.withOpacity(0.08),
-            spreadRadius: 0.5,
-            blurRadius: 10,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: const [
-              SizedBox(
-                height: 15,
+    return Column(
+      children: [
+        Row(
+          children: const [
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: (gameResult.finalResult && gameResult.home.score > gameResult.guest.score) ? const Icon(
+                Icons.workspace_premium,
+                color: Colors.amberAccent,
+                size: 25,
+              ) : Container(),
+            ),
+            Expanded(
+              child: Icon(
+                EventHelpers.getIcon(gameResult.sport),
+                size: 25,
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: (gameResult.finalResult && gameResult.home.score > gameResult.guest.score) ? const Icon(
-                  Icons.workspace_premium,
-                  color: Colors.amberAccent,
-                  size: 25,
-                ) : Container(),
-              ),
-              Expanded(
-                child: Icon(
-                  EventHelpers.getIcon(gameResult.sport),
-                  size: 25,
-                ),
-              ),
-              Expanded(
-                child: (gameResult.finalResult && gameResult.home.score < gameResult.guest.score) ? const Icon(
-                  Icons.workspace_premium,
-                  color: Colors.amberAccent,
-                  size: 25,
-                ) : Container(),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(dateFormat.format(gameResult.date)),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: FutureBuilder(
-                        future: MascotImageCacheManager()
-                            .getSingleFile(gameResult.home.mascot),
-                        builder: (context, AsyncSnapshot<File> snapshot) {
-                          if (snapshot.connectionState ==
-                                  ConnectionState.done &&
-                              snapshot.data != null) {
-                            return Container(
-                              padding: const EdgeInsets.only(
-                                left: 10,
-                                right: 10,
+            ),
+            Expanded(
+              child: (gameResult.finalResult && gameResult.home.score < gameResult.guest.score) ? const Icon(
+                Icons.workspace_premium,
+                color: Colors.amberAccent,
+                size: 25,
+              ) : Container(),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(dateFormat.format(gameResult.date)),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: FutureBuilder(
+                      future: MascotImageCacheManager()
+                          .getSingleFile(gameResult.home.mascot),
+                      builder: (context, AsyncSnapshot<File> snapshot) {
+                        if (snapshot.connectionState ==
+                                ConnectionState.done &&
+                            snapshot.data != null) {
+                          return Container(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                            ),
+                            height: 65,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: FileImage(snapshot.data!),
+                                fit: BoxFit.fitHeight,
                               ),
-                              height: 65,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: FileImage(snapshot.data!),
-                                  fit: BoxFit.fitHeight,
-                                ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox(
+                            height: 65,
+                            width: 65,
+                            child: Center(
+                              child: SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: CircularProgressIndicator(),
                               ),
-                            );
-                          } else {
-                            return const SizedBox(
-                              height: 65,
-                              width: 65,
-                              child: Center(
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
+                            ),
+                          );
+                        }
+                      },
                     ),
-                    Center(
-                      child: Text(gameResult.home.name),
-                    ),
-                  ],
-                ),
+                  ),
+                  Center(
+                    child: Text(gameResult.home.name),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      gameResult.home.score.toString() +
-                          ' - ' +
-                          gameResult.guest.score.toString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 22,
-                      ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    gameResult.home.score.toString() +
+                        ' - ' +
+                        gameResult.guest.score.toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(15),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    height: 20,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
                       ),
-                      height: 20,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 15,
-                          right: 15,
-                        ),
-                        child: Text(
-                          gameResult.finalResult ? 'Final' : 'Active',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
+                      child: Text(
+                        gameResult.finalResult ? 'Final' : 'Active',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: FutureBuilder(
-                        future: MascotImageCacheManager()
-                            .getSingleFile(gameResult.guest.mascot),
-                        builder: (context, AsyncSnapshot<File> snapshot) {
-                          if (snapshot.connectionState ==
-                                  ConnectionState.done &&
-                              snapshot.data != null) {
-                            return Container(
-                              padding: const EdgeInsets.only(
-                                left: 10,
-                                right: 10,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: FutureBuilder(
+                      future: MascotImageCacheManager()
+                          .getSingleFile(gameResult.guest.mascot),
+                      builder: (context, AsyncSnapshot<File> snapshot) {
+                        if (snapshot.connectionState ==
+                                ConnectionState.done &&
+                            snapshot.data != null) {
+                          return Container(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                            ),
+                            height: 65,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: FileImage(snapshot.data!),
+                                fit: BoxFit.fitHeight,
                               ),
-                              height: 65,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: FileImage(snapshot.data!),
-                                  fit: BoxFit.fitHeight,
-                                ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox(
+                            height: 65,
+                            width: 65,
+                            child: Center(
+                              child: SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: CircularProgressIndicator(),
                               ),
-                            );
-                          } else {
-                            return const SizedBox(
-                              height: 65,
-                              width: 65,
-                              child: Center(
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
+                            ),
+                          );
+                        }
+                      },
                     ),
-                    Center(
-                      child: Text(gameResult.guest.name),
-                    ),
-                  ],
-                ),
+                  ),
+                  Center(
+                    child: Text(gameResult.guest.name),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        Row(
+          children: const [
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        ),
+      ],
     );
   }
 
   Widget buildEventUpdate(EventUpdate eventUpdate) {
     // Display list of Cards with event updates
     DateFormat dateFormat = DateFormat('MMM dd, yyyy');
-    return Card(
+    return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        leading: const Icon(Icons.info),
-        title: Text(
-          eventUpdate.title,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          eventUpdate.content,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        onTap: () {
-          openInfoDialog(
-              eventUpdate.title,
-              eventUpdate.content +
-                  '\n\n' +
-                  dateFormat.format(eventUpdate.date));
-        },
+      title: Text(
+        eventUpdate.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
+      subtitle: Text(
+        eventUpdate.content,
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+      ),
+      onTap: () {
+        openInfoDialog(
+            eventUpdate.title,
+            eventUpdate.content +
+                '\n\n' +
+                dateFormat.format(eventUpdate.date));
+      },
     );
   }
 
