@@ -1,19 +1,16 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
+import 'package:flutter_share_me/flutter_share_me.dart';
 import 'package:intl/intl.dart';
-import 'package:pats4u/models/announcement.dart';
-import 'package:pats4u/models/event.dart';
 import 'package:pats4u/models/event_update.dart';
 import 'package:pats4u/models/face_book_post.dart';
 import 'package:pats4u/models/feed.dart';
 import 'package:pats4u/models/game_result.dart';
-import 'package:pats4u/models/youTubeVideo.dart';
+import 'package:pats4u/models/you_tube_video.dart';
 import 'package:pats4u/providers/backend.dart';
 import 'package:pats4u/providers/event_helpers.dart';
 import 'package:pats4u/providers/feed_image_cache_provider.dart';
 import 'package:pats4u/providers/mascot_image_cache_provider.dart';
-import 'package:pats4u/providers/size_config.dart';
 import 'package:pats4u/views/announcements/announcements.dart';
 import 'package:pats4u/views/settings/settings.dart';
 import 'package:pats4u/widgets/minimal_app_bar.dart';
@@ -177,6 +174,21 @@ class _HomeFeedState extends State<HomeFeed> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
+              trailing: IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () {
+                  FlutterShareMe flutterShareMe = FlutterShareMe();
+                  String shareText = '';
+                  if (feedItem.finalResult && feedItem.home.score > feedItem.guest.score) {
+                    shareText = 'Patriots defeated the ' + feedItem.guest.name + ' ' + feedItem.sport.toString().split('.')[1] + ' team ' + feedItem.home.score.toString() + '-' + feedItem.guest.score.toString() + '!';
+                  } else if (feedItem.finalResult && feedItem.home.score < feedItem.guest.score) {
+                    shareText = 'Patriots lost the battle against the ' + feedItem.guest.name + ' ' + feedItem.sport.toString().split('.')[1] + ' team ' + feedItem.home.score.toString() + '-' + feedItem.guest.score.toString();
+                  } else {
+                    shareText = 'Patriots are currently battling the ' + feedItem.guest.name + ' ' + feedItem.sport.toString().split('.')[1] + ' team with a score of ' + feedItem.home.score.toString() + '-' + feedItem.guest.score.toString();
+                  }
+                  flutterShareMe.shareToSystem(msg: shareText);
+                },
+              ),
             );
             body = buildGameResult(feedItem);
           } else if (feedItem is YouTubeVideo) {
@@ -194,6 +206,14 @@ class _HomeFeedState extends State<HomeFeed> {
                 DateFormat('MMM dd, yyyy').format(feedItem.date),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
+              ),
+              trailing: IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () {
+                  FlutterShareMe flutterShareMe = FlutterShareMe();
+                  String shareText = 'Check out the ' + feedItem.title + ' video on YouTube: https://youtube.com/watch?v=' + feedItem.id;
+                  flutterShareMe.shareToSystem(msg: shareText);
+                },
               ),
             );
             body = buildYouTubeVideo(feedItem);
@@ -217,15 +237,21 @@ class _HomeFeedState extends State<HomeFeed> {
             body = buildFacebookPost(feedItem);
           }
 
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+          return Container(
+            padding: const EdgeInsets.only(
+              top: 15,
+              bottom: 15,
             ),
-            child: Column(
-              children: [
-                header,
-                body,
-              ],
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  header,
+                  body,
+                ],
+              ),
             ),
           );
         },
